@@ -1,0 +1,36 @@
+.slide { --accent: #00DDD0; background: var(--surface-0); overflow: hidden; }
+
+.inner {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center; height: 100%;
+  gap: var(--space-4); max-width: 700px; margin: 0 auto;
+}
+
+.eyebrow {
+  font-family: var(--font-mono); font-size: 0.75rem;
+  letter-spacing: 0.2em; color: var(--text-muted);
+}
+
+.title {
+  font-family: var(--font-display); font-weight: 300;
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  color: var(--text-secondary); line-height: 1.4;
+  text-transform: none;
+}
+
+.bonusWord {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(5rem, 12vw, 11rem);
+  color: var(--accent); line-height: 1;
+  letter-spacing: -0.03em;
+  text-shadow: 0 0 80px rgba(0,221,208,0.4);
+}
+
+.body {
+  font-family: var(--font-body); font-size: 1rem;
+  color: var(--text-secondary); line-height: 1.6;
+}
+
+.body strong { color: var(--white); }

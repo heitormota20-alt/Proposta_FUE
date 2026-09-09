@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root {
+  /* Marca */
+  --mint-100: #D2F7E8;
+  --mint-300: #9DEDCE;
+  --mint-500: #68E3B4;
+  --mint-700: #449475;
+  --mint-900: #1F4436;
+  --mint-950: #0C1B16;
+
+  /* Superfícies */
+  --surface-0: #000000;
+  --surface-1: #040806;
+  --surface-2: #07100D;
+  --surface-3: #0B1914;
+  --surface-4: #11241D;
+
+  /* Texto */
+  --white: #FFFFFF;
+  --text-secondary: #B9BBBB;
+  --text-muted: #838685;
+  --line: rgba(255, 255, 255, 0.10);
+
+  /* Tipografia */
+  --font-display: 'Mozilla Headline', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Espaçamento (base 8px) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 96px;
+  --space-9: 128px;
+  --space-10: 160px;
+
+  /* Raio */
+  --radius-sm: 4px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  /* Transições */
+  --transition-base: 300ms ease-out;
+  --transition-slide: 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}

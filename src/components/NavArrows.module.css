@@ -1,0 +1,38 @@
+.arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--line);
+  color: var(--text-muted);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: border-color var(--transition-base), color var(--transition-base), background var(--transition-base);
+  backdrop-filter: blur(8px);
+}
+
+.arrow:hover {
+  border-color: var(--mint-500);
+  color: var(--mint-500);
+  background: rgba(104, 227, 180, 0.08);
+}
+
+.left {
+  left: clamp(1rem, 2vw, 1.5rem);
+}
+
+.right {
+  right: clamp(1rem, 2vw, 1.5rem);
+}
+
+@media (max-width: 768px) {
+  .arrow {
+    display: none;
+  }
+}

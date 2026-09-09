@@ -1,0 +1,43 @@
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Mint — cor primária da marca */
+.mint {
+  background: radial-gradient(circle at center,
+    rgba(104, 227, 180, 0.85) 0%,
+    rgba(31, 68, 54, 0.6) 45%,
+    transparent 75%
+  );
+}
+
+/* Teal profundo */
+.teal {
+  background: radial-gradient(circle at center,
+    rgba(30, 160, 130, 0.7) 0%,
+    rgba(12, 27, 22, 0.5) 50%,
+    transparent 75%
+  );
+}
+
+/* Azul frio — para contraste em slides de dados */
+.blue {
+  background: radial-gradient(circle at center,
+    rgba(56, 130, 200, 0.6) 0%,
+    rgba(10, 20, 40, 0.4) 50%,
+    transparent 75%
+  );
+}
+
+/* Âmbar — contraste quente para slides de urgência/preço */
+.amber {
+  background: radial-gradient(circle at center,
+    rgba(220, 120, 40, 0.55) 0%,
+    rgba(40, 15, 0, 0.4) 50%,
+    transparent 75%
+  );
+}

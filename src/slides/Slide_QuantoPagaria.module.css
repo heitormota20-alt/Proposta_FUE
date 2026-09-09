@@ -1,0 +1,28 @@
+.slide { --accent: #00DDD0; background: var(--surface-0); overflow: hidden; }
+
+.inner {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center; height: 100%;
+  gap: var(--space-5); max-width: 800px; margin: 0 auto;
+}
+
+.eyebrow {
+  font-family: var(--font-mono); font-size: 0.75rem;
+  letter-spacing: 0.18em; color: var(--text-muted); text-transform: uppercase;
+}
+
+.question {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(2.5rem, 5.5vw, 6rem);
+  color: var(--white); line-height: 1.1;
+  text-transform: none; letter-spacing: -0.03em;
+}
+
+.accent { font-style: italic; font-weight: 300; color: var(--accent); }
+
+.hint {
+  font-family: var(--font-body); font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  color: var(--text-muted); max-width: 44ch; line-height: 1.6;
+}

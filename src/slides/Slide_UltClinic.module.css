@@ -1,0 +1,49 @@
+.slide { --accent: #00DDD0; background: var(--surface-0); overflow: hidden; }
+
+.inner {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column;
+  justify-content: center; gap: var(--space-7); height: 100%; max-width: 920px;
+}
+
+.header { display: flex; flex-direction: column; gap: var(--space-3); }
+
+.badge {
+  font-family: var(--font-mono); font-size: 0.6875rem;
+  letter-spacing: 0.25em; color: var(--accent);
+  border: 1px solid var(--accent); border-radius: 4px;
+  padding: var(--space-1) var(--space-3); width: fit-content;
+}
+
+.title {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(3rem, 6vw, 6rem);
+  color: var(--white); line-height: 1; text-transform: none; letter-spacing: -0.03em;
+}
+
+.accent { font-style: italic; font-weight: 300; color: var(--accent); }
+
+.sub {
+  font-family: var(--font-body); font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  color: var(--text-secondary); line-height: 1.6; max-width: 50ch;
+}
+
+.grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3) var(--space-7);
+}
+
+.item {
+  display: flex; gap: var(--space-3); align-items: flex-start;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.itemNum {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  color: var(--accent); opacity: 0.6; flex-shrink: 0; padding-top: 2px;
+}
+
+.itemText {
+  font-family: var(--font-body); font-size: 0.9rem;
+  color: var(--text-secondary); line-height: 1.4;
+}

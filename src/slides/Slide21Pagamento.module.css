@@ -1,0 +1,94 @@
+.slide { --accent: #00DDD0; background: var(--surface-0); overflow: hidden; }
+
+.inner {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column;
+  justify-content: center; gap: var(--space-7);
+  height: 100%; max-width: 960px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono); font-size: 0.6875rem;
+  letter-spacing: 0.15em; color: var(--text-muted);
+}
+
+.title {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(2rem, 3.5vw, 3.75rem);
+  color: var(--white); line-height: 1.15; text-transform: none; letter-spacing: -0.02em;
+}
+
+.accent { font-style: italic; font-weight: 300; color: var(--accent); }
+
+.options {
+  display: flex; align-items: center; gap: var(--space-6);
+}
+
+.option {
+  flex: 1; padding: var(--space-7) var(--space-7);
+  border: 1px solid rgba(255,255,255,0.12); border-radius: 16px;
+  background: rgba(255,255,255,0.025);
+  display: flex; flex-direction: column; gap: var(--space-3);
+}
+
+.optionMain {
+  border-color: rgba(0,221,208,0.35);
+  background: rgba(0,221,208,0.05);
+}
+
+.optionTag {
+  font-family: var(--font-mono); font-size: 0.625rem;
+  letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase;
+}
+
+.optionPrice { display: flex; align-items: flex-start; gap: var(--space-2); line-height: 1; }
+
+.currency {
+  font-family: var(--font-mono); font-size: 1rem;
+  color: var(--accent); margin-top: 0.4rem;
+}
+
+.amount {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  color: var(--white); letter-spacing: -0.03em;
+}
+
+.suffix {
+  font-family: var(--font-display); font-size: 1.5rem;
+  color: var(--white); align-self: flex-end; margin-bottom: 4px;
+}
+
+.optionDesc {
+  font-family: var(--font-body); font-size: 0.875rem;
+  color: var(--text-muted); line-height: 1.5;
+}
+
+.optionOr {
+  font-family: var(--font-display); font-size: 1.25rem;
+  color: var(--text-muted); font-style: italic; font-weight: 300;
+  flex-shrink: 0;
+}
+
+.installment {
+  display: flex; align-items: flex-start; gap: var(--space-2); line-height: 1;
+}
+
+.installAmount {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(2rem, 3.5vw, 3.25rem);
+  color: var(--white); letter-spacing: -0.03em;
+}
+
+.noFees {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  letter-spacing: 0.1em; color: var(--accent);
+  align-self: flex-end; margin-bottom: 4px;
+}
+
+.footer {
+  font-family: var(--font-mono); font-size: 0.6875rem;
+  letter-spacing: 0.12em; color: var(--text-muted);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: var(--space-4);
+}

@@ -1,0 +1,233 @@
+.slide { --accent: #00DDD0; background: var(--surface-0); overflow: hidden; }
+
+/* ── Inner — coluna principal ──────────────────────── */
+.inner {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column;
+  gap: var(--space-4);
+  height: 100%;
+}
+
+/* ── Cabeçalho centrado ─────────────────────────────── */
+.header {
+  flex-shrink: 0;
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  gap: var(--space-2);
+}
+
+.header_idle { opacity: 0; }
+
+.header_in {
+  animation: headerIn 0.65s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.header_out {
+  animation: headerOut 0.35s ease both;
+}
+
+@keyframes headerIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes headerOut {
+  from { opacity: 1; }
+  to   { opacity: 0; transform: translateY(-12px); }
+}
+
+.title {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.75rem, 3vw, 3.25rem);
+  color: var(--white); line-height: 1.1;
+  text-transform: none; letter-spacing: -0.02em;
+}
+
+.accent { font-style: italic; font-weight: 300; color: var(--accent); }
+
+.subtitle {
+  font-family: var(--font-body); font-size: clamp(0.875rem, 1.1vw, 1rem);
+  color: var(--text-secondary); line-height: 1.5;
+}
+
+.subtitle strong { color: var(--accent); font-weight: 600; }
+
+/* ── Timeline ────────────────────────────────────────── */
+.timeline {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Fotos — dominam o espaço ───────────────────────── */
+.photosRow {
+  flex: 1;           /* toda a altura disponível */
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-3);
+}
+
+.photoCell {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+/* Animações da foto */
+.photo_idle { opacity: 0; }
+
+.photo_in {
+  animation: photoIn 0.75s cubic-bezier(0.22,1,0.36,1) var(--delay, 0ms) both;
+}
+
+.photo_out { animation: fadeOut 0.3s ease both; }
+
+@keyframes photoIn {
+  from { opacity: 0; transform: translateY(-20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* O slot da foto em si */
+.photo {
+  flex: 1;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 221, 208, 0.35);
+  box-shadow:
+    0 0 0 1px rgba(0, 221, 208, 0.12),
+    0 0 30px rgba(0, 221, 208, 0.18),
+    inset 0 0 40px rgba(0, 221, 208, 0.04);
+  background: rgba(0, 221, 208, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.55) 100%);
+  pointer-events: none;
+}
+
+.photoLabel {
+  font-family: var(--font-mono);
+  font-size: 0.55rem; letter-spacing: 0.35em;
+  color: rgba(0, 221, 208, 0.25);
+  text-transform: uppercase;
+  position: relative; z-index: 1;
+}
+
+/* ── Linha + Dots ────────────────────────────────────── */
+.lineRow {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 36px;
+  flex-shrink: 0;
+  gap: var(--space-3);
+}
+
+.lineBar {
+  position: absolute;
+  left: 0; right: 0; top: 50%;
+  transform: translateY(-50%);
+  height: 1px;
+  background: rgba(0, 221, 208, 0.1);
+  overflow: hidden;
+}
+
+.lineFill {
+  height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--accent), rgba(0,221,208,0.4));
+  transition: width 1.8s cubic-bezier(0.22,1,0.36,1) 0.3s;
+}
+
+.lineFillIn { width: 100%; }
+
+.dotCell {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; z-index: 1;
+}
+
+.dot {
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: var(--surface-0);
+  box-shadow: 0 0 14px rgba(0, 221, 208, 0.55);
+  flex-shrink: 0;
+}
+
+.dot_idle { opacity: 0; transform: scale(0); }
+
+.dot_in {
+  animation: dotPop 0.4s cubic-bezier(0.22,1,0.36,1) var(--delay, 0ms) both;
+}
+
+.dot_out { animation: fadeOut 0.2s ease both; }
+
+@keyframes dotPop {
+  from { opacity: 0; transform: scale(0); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Textos ──────────────────────────────────────────── */
+.textsRow {
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--space-3);
+  padding-top: var(--space-2);
+}
+
+.textCell {
+  flex: 1;
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  gap: 3px;
+}
+
+.text_idle { opacity: 0; }
+
+.text_in {
+  animation: textIn 0.6s cubic-bezier(0.22,1,0.36,1) var(--delay, 0ms) both;
+}
+
+.text_out { animation: fadeOut 0.3s ease both; }
+
+@keyframes textIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+.period {
+  font-family: var(--font-body);
+  font-size: clamp(0.65rem, 0.8vw, 0.75rem);
+  color: var(--text-muted); line-height: 1.35;
+}
+
+.eventTitle {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(0.8rem, 1vw, 1rem);
+  color: var(--white); text-transform: none;
+  line-height: 1.2; letter-spacing: -0.01em;
+}
+
+.eventDesc {
+  font-family: var(--font-body);
+  font-size: clamp(0.6rem, 0.75vw, 0.7rem);
+  color: var(--text-muted); line-height: 1.35;
+}

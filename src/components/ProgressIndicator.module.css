@@ -1,0 +1,26 @@
+.indicator {
+  position: fixed;
+  bottom: clamp(1.5rem, 3vw, 2rem);
+  right: clamp(1.5rem, 3vw, 2rem);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.current {
+  color: var(--mint-500);
+}
+
+.separator {
+  color: var(--mint-500);
+  opacity: 0.5;
+}
+
+.total {
+  color: var(--text-muted);
+}

@@ -1,0 +1,17 @@
+# Dependências
+node_modules/
+
+# Build
+dist/
+
+# Arquivos grandes (exceder limite do GitHub)
+public/*.pptx
+public/*.ppt
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.local
