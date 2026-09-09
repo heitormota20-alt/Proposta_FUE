@@ -1,4 +1,4 @@
-.slide { --accent: #00DDD0; background: var(--surface-0); overflow: hidden; }
+.slide { --accent: #15bc85; background: var(--surface-0); overflow: hidden; }
 
 .inner {
   position: relative; z-index: 2;
@@ -39,7 +39,7 @@
 .bonusPill {
   font-family: var(--font-mono); font-size: 0.55rem;
   letter-spacing: 0.15em; color: var(--accent);
-  border: 1px solid rgba(0,221,208,0.4); border-radius: 3px;
+  border: 1px solid rgba(21, 188, 133,0.4); border-radius: 3px;
   padding: 1px 5px;
 }
 
@@ -52,7 +52,7 @@
 
 .totalRow {
   margin-top: var(--space-2); border-bottom: none;
-  border-top: 1px solid rgba(0,221,208,0.3);
+  border-top: 1px solid rgba(21, 188, 133,0.3);
   padding-top: var(--space-3);
 }
 

@@ -1,4 +1,12 @@
-.slide { --accent: #00DDD0; background: var(--surface-0); overflow: hidden; }
+.slide { --accent: #15bc85; background: var(--surface-0); overflow: hidden; }
+
+/* ── Background Grainient — textura sutil atrás do conteúdo ── */
+.grainientBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.22;
+}
 
 .inner {
   position: relative; z-index: 2;
@@ -14,11 +22,19 @@
   align-self: flex-start; margin-bottom: -2rem;
 }
 
+/* Fecha a citação — mesmo estilo, glifo de fechamento colado ao fim do texto */
+.quoteMarksClose {
+  align-self: flex-end;
+  margin-bottom: 0;
+  margin-top: -0.5rem;
+}
+
 .quote {
   font-family: var(--font-display); font-weight: 300;
   font-size: clamp(1.75rem, 3.2vw, 3.25rem);
   color: var(--white); line-height: 1.25;
   text-transform: none; letter-spacing: -0.01em;
+  text-wrap: pretty;
 }
 
 .accent { font-style: italic; color: var(--accent); font-weight: 400; }

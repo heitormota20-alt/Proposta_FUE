@@ -1,4 +1,12 @@
-.slide { --accent: #00DDD0; background: var(--surface-0); overflow: hidden; }
+.slide { --accent: #15bc85; background: var(--surface-0); overflow: hidden; }
+
+/* ── Background Grainient — textura sutil atrás do conteúdo ── */
+.grainientBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.22;
+}
 
 /* ── Inner — coluna principal ──────────────────────── */
 .inner {
@@ -94,12 +102,12 @@
 .photo {
   flex: 1;
   border-radius: 14px;
-  border: 1px solid rgba(0, 221, 208, 0.35);
+  border: 1px solid rgba(21, 188, 133, 0.35);
   box-shadow:
-    0 0 0 1px rgba(0, 221, 208, 0.12),
-    0 0 30px rgba(0, 221, 208, 0.18),
-    inset 0 0 40px rgba(0, 221, 208, 0.04);
-  background: rgba(0, 221, 208, 0.04);
+    0 0 0 1px rgba(21, 188, 133, 0.12),
+    0 0 30px rgba(21, 188, 133, 0.18),
+    inset 0 0 40px rgba(21, 188, 133, 0.04);
+  background: rgba(21, 188, 133, 0.04);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,10 +123,47 @@
   pointer-events: none;
 }
 
+.photoImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+}
+
+/* Ainda não revelada — sem imagem, só o slot vazio */
+.photoLocked .photoImg {
+  opacity: 0;
+  transform: scale(1.04);
+}
+
+/* Revelada pela seta de avançar — entra com scale + leve subida + brilho */
+.photoRevealed .photoImg {
+  animation: photoReveal 0.9s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.photoRevealed {
+  animation: photoGlowPulse 1s ease-out both;
+}
+
+@keyframes photoReveal {
+  0%   { opacity: 0; transform: scale(1.18) translateY(18px); filter: brightness(1.7) saturate(1.35); }
+  55%  { opacity: 1; filter: brightness(1.15) saturate(1.1); }
+  100% { opacity: 1; transform: scale(1) translateY(0); filter: brightness(1) saturate(1); }
+}
+
+@keyframes photoGlowPulse {
+  0%   { box-shadow: 0 0 0 1px rgba(21,188,133,0.12), 0 0 30px rgba(21,188,133,0.18), inset 0 0 40px rgba(21,188,133,0.04); }
+  35%  { box-shadow: 0 0 0 1px rgba(21,188,133,0.6), 0 0 65px rgba(21,188,133,0.55), inset 0 0 40px rgba(21,188,133,0.1); }
+  100% { box-shadow: 0 0 0 1px rgba(21,188,133,0.12), 0 0 30px rgba(21,188,133,0.18), inset 0 0 40px rgba(21,188,133,0.04); }
+}
+
 .photoLabel {
   font-family: var(--font-mono);
   font-size: 0.55rem; letter-spacing: 0.35em;
-  color: rgba(0, 221, 208, 0.25);
+  color: rgba(21, 188, 133, 0.25);
   text-transform: uppercase;
   position: relative; z-index: 1;
 }
@@ -138,17 +183,15 @@
   left: 0; right: 0; top: 50%;
   transform: translateY(-50%);
   height: 1px;
-  background: rgba(0, 221, 208, 0.1);
+  background: rgba(21, 188, 133, 0.1);
   overflow: hidden;
 }
 
 .lineFill {
   height: 100%; width: 0;
-  background: linear-gradient(90deg, var(--accent), rgba(0,221,208,0.4));
-  transition: width 1.8s cubic-bezier(0.22,1,0.36,1) 0.3s;
+  background: linear-gradient(90deg, var(--accent), rgba(21, 188, 133,0.4));
+  transition: width 0.6s cubic-bezier(0.22,1,0.36,1);
 }
-
-.lineFillIn { width: 100%; }
 
 .dotCell {
   flex: 1;
@@ -163,8 +206,20 @@
   border-radius: 50%;
   border: 2px solid var(--accent);
   background: var(--surface-0);
-  box-shadow: 0 0 14px rgba(0, 221, 208, 0.55);
+  box-shadow: 0 0 14px rgba(21, 188, 133, 0.55);
   flex-shrink: 0;
+  padding: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.2s ease;
+}
+
+.dot:hover { transform: scale(1.25); }
+
+.dotRevealed {
+  background: var(--accent);
+  box-shadow: 0 0 20px rgba(21, 188, 133, 0.9);
 }
 
 .dot_idle { opacity: 0; transform: scale(0); }

@@ -1,4 +1,4 @@
-.slide { --accent: #00DDD0; background: var(--surface-0); overflow: hidden; }
+.slide { --accent: #15bc85; background: var(--surface-0); overflow: hidden; }
 
 .inner {
   position: relative; z-index: 2;

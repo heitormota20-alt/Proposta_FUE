@@ -1,17 +1,22 @@
 import { useEffect, useRef, useCallback } from 'react'
 
-export default function SlideContainer({ children, onSlideChange, totalSlides }) {
+export default function SlideContainer({ children, onSlideChange, onNavigate }) {
   const trackRef = useRef(null)
   const currentSlide = useRef(0)
+  const wheelLockRef = useRef(false)
 
-  const goToSlide = useCallback((index) => {
+  // Sincroniza o índice atual quando o scroll muda por outro motivo
+  // (arrasto de trackpad/touch em dispositivos que não passam pelo wheel).
+  const syncFromScroll = useCallback(() => {
     const track = trackRef.current
     if (!track) return
-    const slides = track.querySelectorAll('.slide')
-    if (index < 0 || index >= slides.length) return
-    slides[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
-    currentSlide.current = index
-    onSlideChange?.(index)
+    const scrollLeft = track.scrollLeft
+    const slideWidth = track.clientWidth
+    const index = Math.round(scrollLeft / slideWidth)
+    if (index !== currentSlide.current) {
+      currentSlide.current = index
+      onSlideChange?.(index)
+    }
   }, [onSlideChange])
 
   useEffect(() => {
@@ -21,31 +26,38 @@ export default function SlideContainer({ children, onSlideChange, totalSlides })
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
         e.preventDefault()
-        goToSlide(currentSlide.current + 1)
+        onNavigate?.(1)
       } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
         e.preventDefault()
-        goToSlide(currentSlide.current - 1)
+        onNavigate?.(-1)
       }
     }
 
-    const handleScroll = () => {
-      const scrollLeft = track.scrollLeft
-      const slideWidth = track.clientWidth
-      const index = Math.round(scrollLeft / slideWidth)
-      if (index !== currentSlide.current) {
-        currentSlide.current = index
-        onSlideChange?.(index)
-      }
+    // Assume total controle da navegação por wheel/trackpad — assim os
+    // slides com carrossel sanfona conseguem travar o avanço até o
+    // usuário passar por todas as imagens, igual ao clique na seta.
+    const handleWheel = (e) => {
+      e.preventDefault()
+      if (wheelLockRef.current) return
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
+      if (Math.abs(delta) < 12) return
+      wheelLockRef.current = true
+      onNavigate?.(delta > 0 ? 1 : -1)
+      setTimeout(() => {
+        wheelLockRef.current = false
+      }, 550)
     }
 
     window.addEventListener('keydown', handleKeyDown)
-    track.addEventListener('scroll', handleScroll, { passive: true })
+    track.addEventListener('wheel', handleWheel, { passive: false })
+    track.addEventListener('scroll', syncFromScroll, { passive: true })
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
-      track.removeEventListener('scroll', handleScroll)
+      track.removeEventListener('wheel', handleWheel)
+      track.removeEventListener('scroll', syncFromScroll)
     }
-  }, [goToSlide, onSlideChange])
+  }, [onNavigate, syncFromScroll])
 
   return (
     <div ref={trackRef} className="slides-track">

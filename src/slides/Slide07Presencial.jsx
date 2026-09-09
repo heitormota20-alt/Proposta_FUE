@@ -1,41 +1,69 @@
 import styles from './Slide07Presencial.module.css'
-import GradientOrb from '../components/GradientOrb'
+import AccordionGallery from '../components/AccordionGallery'
+import GradientBlinds from '../components/GradientBlinds'
 
-export default function Slide07Presencial() {
+const galleryItems = [
+  { image: '/images/Slide_07/Imagem_03.jpg', label: 'Presencial' },
+  { image: '/images/Slide_07/Imagem_02.png', label: 'Online' },
+  { image: '/images/Slide_07/Imagem_01.png', label: 'Ao vivo' },
+]
+
+// Total de cards da galeria — usado pelo App para saber quando parar de
+// expandir e voltar a avançar de slide.
+export const SLIDE07_STEPS = galleryItems.length
+
+export default function Slide07Presencial({ galleryIndex = 0, onGalleryIndexChange }) {
   return (
     <section className={`slide ${styles.slide}`}>
-      <GradientOrb variant="teal" size={700} top="-10%" left="60%" opacity={0.18} />
-
+      <div className={styles.grainientBg}>
+        <GradientBlinds
+          gradientColors={['#10B981', '#10B981']}
+          color1="#10B981"
+          color2="#10B981"
+          angle={0}
+          noise={0.3}
+          blindCount={28}
+          blindMinWidth={22}
+          spotlightRadius={0.35}
+          spotlightSoftness={1}
+          spotlightOpacity={1}
+          mouseDampening={0.15}
+          distortAmount={0}
+          shineDirection="left"
+          mixBlendMode="lighten"
+        />
+      </div>
       <div className={styles.inner}>
-        <div className={styles.left}>
-          <span className={styles.badge}>PRESENCIAIS</span>
-          <h2 className={styles.title}>
-            Você vai operar junto com o{' '}
-            <em className={styles.accent}>Dr. Rafael Ultramar</em>{' '}
-            e sua equipe.
-          </h2>
-          <p className={styles.body}>
-            Dentro do <strong>centro cirúrgico</strong> dele, com os{' '}
-            <strong>melhores equipamentos</strong> e{' '}
-            <strong>infraestrutura</strong> do mercado.
-          </p>
-          <div className={styles.tag}>Da teoria à prática intensa — tudo que um médico procura para ser um bom cirurgião e um bom empresário.</div>
+
+        {/* ── Título no topo ── */}
+        <div className={styles.header}>
+          <h1 className={styles.title}>
+            Da teoria à prática intensa,
+            <br />
+            tudo que um médico procura para ser
+            <br />
+            um bom cirurgião e um bom empresário, está aqui.
+          </h1>
         </div>
 
-        <div className={styles.right}>
-          <div className={styles.statCard}>
-            <span className={styles.statNum}>3</span>
-            <span className={styles.statLabel}>dias intensivos de<br />imersão presencial</span>
-          </div>
-          <div className={styles.statCard}>
-            <span className={styles.statNum}>6</span>
-            <span className={styles.statLabel}>encontros de fellowship<br />na clínica real</span>
-          </div>
-          <div className={styles.statCard}>
-            <span className={styles.statNum}>10</span>
-            <span className={styles.statLabel}>alunos por turma<br />máximo</span>
-          </div>
+        {/* ── Galeria em acordeão ao centro — legenda com estatística embutida ── */}
+        <div className={styles.galleryWrap}>
+          <AccordionGallery
+            items={galleryItems}
+            activeIndex={galleryIndex}
+            onActiveChange={onGalleryIndexChange}
+            defaultIndex={0}
+            expandRatio={0.52}
+            trigger="hover"
+            height={440}
+            gap={10}
+            radius={16}
+            accentColor="#15bc85"
+            overlayColor="#060010"
+            textColor="#ffffff"
+          />
         </div>
+
       </div>
     </section>
   )

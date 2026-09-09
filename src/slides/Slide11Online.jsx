@@ -1,47 +1,61 @@
 import styles from './Slide11Online.module.css'
-import GradientOrb from '../components/GradientOrb'
+import AccordionGallery from '../components/AccordionGallery'
+import GradientBlinds from '../components/GradientBlinds'
 
-export default function Slide11Online() {
-  const tracks = [
-    {
-      name: 'Ultramar Clinic',
-      desc: 'Metodologia de aceleração clínica para médicos que querem dominar as melhores técnicas de cirurgia para transplante capilar.',
-      tag: 'TÉCNICA CIRÚRGICA',
-    },
-    {
-      name: 'Ultramar Business',
-      desc: 'A visão do Dr. Rafael Ultramar sobre negócios e o passo a passo de como ele saiu do absoluto zero para uma clínica que faturou mais de R$15 milhões no último ano.',
-      tag: 'GESTÃO & NEGÓCIOS',
-    },
-  ]
+const galleryItems = [
+  { image: '/images/Slide_13/img-01.jpg', label: 'Treinamento com Equipe Cirúrgica' },
+  { image: '/images/Slide_13/img-02.jpg', label: 'Participação em Transplantes Reais' },
+  { image: '/images/Slide_13/img-03.jpg', label: 'Aplicação de Técnicas em Tempos Cirúrgicos' },
+  { image: '/images/Slide_13/img-04.jpg', label: 'Hands-On guiado pelos Mentores' },
+]
 
+export const SLIDE11_STEPS = galleryItems.length
+
+export default function Slide11Online({ galleryIndex = 0, onGalleryIndexChange }) {
   return (
     <section className={`slide ${styles.slide}`}>
-      <GradientOrb variant="teal" size={700} top="-20%" right="-15%" opacity={0.2} />
-      <GradientOrb variant="blue" size={400} bottom="5%" left="5%" opacity={0.1} />
-
+      <div className={styles.grainientBg}>
+        <GradientBlinds
+          gradientColors={['#10B981', '#10B981']}
+          color1="#10B981"
+          color2="#10B981"
+          angle={0}
+          noise={0.3}
+          blindCount={28}
+          blindMinWidth={22}
+          spotlightRadius={0.35}
+          spotlightSoftness={1}
+          spotlightOpacity={1}
+          mouseDampening={0.15}
+          distortAmount={0}
+          shineDirection="left"
+          mixBlendMode="lighten"
+        />
+      </div>
       <div className={styles.inner}>
+
         <div className={styles.header}>
-          <span className={styles.badge}>ONLINE</span>
-          <h2 className={styles.title}>
-            A jornada completa para se tornar o{' '}
-            <em className={styles.accent}>melhor cirurgião</em>{' '}
-            em transplante capilar.
-          </h2>
-          <p className={styles.sub}>
-            Plataforma educacional estilo Netflix · +40 horas de conteúdo · 2 trilhas de aprendizado
-          </p>
+          <span className={styles.badge}>PARTE 03 · CIRURGIA NO SHAVE</span>
+          <h1 className={styles.title}>Hands-On com Cirurgia No Shave</h1>
         </div>
 
-        <div className={styles.tracks}>
-          {tracks.map((t) => (
-            <div key={t.name} className={styles.track}>
-              <span className={styles.trackTag}>{t.tag}</span>
-              <h3 className={styles.trackName}>{t.name}</h3>
-              <p className={styles.trackDesc}>{t.desc}</p>
-            </div>
-          ))}
+        <div className={styles.galleryWrap}>
+          <AccordionGallery
+            items={galleryItems}
+            activeIndex={galleryIndex}
+            onActiveChange={onGalleryIndexChange}
+            defaultIndex={0}
+            expandRatio={0.52}
+            trigger="hover"
+            height={460}
+            gap={10}
+            radius={16}
+            accentColor="#15bc85"
+            overlayColor="#060010"
+            textColor="#ffffff"
+          />
         </div>
+
       </div>
     </section>
   )

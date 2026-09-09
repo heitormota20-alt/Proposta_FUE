@@ -1,39 +1,53 @@
 import { useEffect, useRef, useState } from 'react'
 import styles from './Slide03Quem.module.css'
 import GradientOrb from '../components/GradientOrb'
+import Grainient from '../components/Grainient'
 
 const events = [
   {
     period: 'Natural de',
     title: 'Vitória / ES',
     desc: 'Formado em Engenharia de Produção.',
+    photo: '/images/Slide_03/Img-01.png',
   },
   {
     period: 'Formado em',
     title: 'Engenharia de Produção',
     desc: '',
+    photo: '/images/Slide_03/Img-02.png',
   },
   {
     period: 'Desistiu de um estágio de Engenharia na',
     title: 'Alemanha',
     desc: 'para cursar Medicina.',
+    photo: '/images/Slide_03/Img-03.png',
   },
   {
     period: 'Se mudou para São Paulo para fazer',
     title: 'residência médica',
     desc: 'com foco em Cirurgia Plástica.',
+    photo: '/images/Slide_03/Img-04.png',
   },
   {
     period: 'Conheceu a área de',
     title: 'Transplante Capilar',
     desc: 'como indicação do Chefe de Residência.',
+    photo: '/images/Slide_03/Img-05.png',
   },
 ]
 
-export default function Slide03Quem() {
+// Total de etapas da timeline — usado pelo App para saber quando parar
+// de revelar fotos e voltar a avançar de slide.
+export const SLIDE03_STEPS = events.length
+
+export default function Slide03Quem({ revealedUpTo = -1, onReveal }) {
   const sectionRef = useRef(null)
   const hasVisited = useRef(false)
   const [phase, setPhase] = useState('idle')
+
+  // Dots continuam clicáveis como atalho, mas o fluxo principal é a seta
+  // de avançar (controlada pelo App) — sem blur, a foto só aparece.
+  const reveal = (i) => onReveal?.(i)
 
   useEffect(() => {
     const el = sectionRef.current
@@ -55,6 +69,21 @@ export default function Slide03Quem() {
 
   return (
     <section ref={sectionRef} className={`slide ${styles.slide}`}>
+      <div className={styles.grainientBg}>
+        <Grainient
+          color1="#15bc85"
+          color2="#000000"
+          color3="#79e8c3"
+          timeSpeed={0.25}
+          warpStrength={1.0}
+          warpFrequency={5.0}
+          warpSpeed={2.0}
+          warpAmplitude={50.0}
+          contrast={1.5}
+          grainAmount={0.1}
+          zoom={0.9}
+        />
+      </div>
       <GradientOrb variant="teal" size={700} top="-25%" left="-10%" opacity={0.15} />
       <GradientOrb variant="teal" size={500} bottom="-20%" right="-5%" opacity={0.1} />
 
@@ -74,34 +103,52 @@ export default function Slide03Quem() {
         {/* Timeline */}
         <div className={styles.timeline}>
 
-          {/* Fotos — protagonistas */}
+          {/* Fotos — protagonistas, aparecem uma a uma ao avançar */}
           <div className={styles.photosRow}>
-            {events.map((e, i) => (
-              <div
-                key={i}
-                className={`${styles.photoCell} ${styles[`photo_${phase}`]}`}
-                style={{ '--delay': `${i * 110 + 120}ms` }}
-              >
-                <div className={styles.photo}>
-                  <span className={styles.photoLabel}>FOTO</span>
+            {events.map((e, i) => {
+              const isRevealed = i <= revealedUpTo
+              return (
+                <div
+                  key={i}
+                  className={`${styles.photoCell} ${styles[`photo_${phase}`]}`}
+                  style={{ '--delay': `${i * 110 + 120}ms` }}
+                >
+                  <div className={`${styles.photo} ${isRevealed ? styles.photoRevealed : styles.photoLocked}`}>
+                    <img
+                      src={e.photo}
+                      alt={e.title}
+                      className={styles.photoImg}
+                      loading="lazy"
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
 
           {/* Linha + dots */}
           <div className={styles.lineRow}>
             <div className={styles.lineBar}>
-              <div className={`${styles.lineFill} ${phase === 'in' ? styles.lineFillIn : ''}`} />
+              <div
+                className={styles.lineFill}
+                style={{ width: phase === 'idle' ? '0%' : `${((revealedUpTo + 1) / events.length) * 100}%` }}
+              />
             </div>
-            {events.map((_, i) => (
-              <div key={i} className={styles.dotCell}>
-                <div
-                  className={`${styles.dot} ${styles[`dot_${phase}`]}`}
-                  style={{ '--delay': `${i * 110 + 550}ms` }}
-                />
-              </div>
-            ))}
+            {events.map((_, i) => {
+              const isRevealed = i <= revealedUpTo
+              return (
+                <div key={i} className={styles.dotCell}>
+                  <button
+                    type="button"
+                    className={`${styles.dot} ${styles[`dot_${phase}`]} ${isRevealed ? styles.dotRevealed : ''}`}
+                    style={{ '--delay': `${i * 110 + 550}ms` }}
+                    onClick={() => reveal(i)}
+                    aria-label={`Revelar etapa ${i + 1}`}
+                    aria-pressed={isRevealed}
+                  />
+                </div>
+              )
+            })}
           </div>
 
           {/* Textos */}

@@ -22,12 +22,16 @@ export function useCountUp(target, duration = 1800, trigger = true) {
   return count
 }
 
-export function CountUp({ prefix = '', target, suffix = '', duration = 1800, decimals = 0 }) {
+export function CountUp({ prefix = '', target, suffix = '', duration = 1800, decimals = 0, active }) {
   const [triggered, setTriggered] = useState(false)
   const ref = useRef(null)
-  const count = useCountUp(target, duration, triggered)
+  // Quando `active` é controlado externamente (ex: mesmo observer que dispara
+  // a entrada do slide), ele manda; caso contrário usa o observer próprio.
+  const shouldTrigger = active !== undefined ? active : triggered
+  const count = useCountUp(target, duration, shouldTrigger)
 
   useEffect(() => {
+    if (active !== undefined) return
     const el = ref.current
     if (!el) return
     const observer = new IntersectionObserver(
@@ -36,7 +40,7 @@ export function CountUp({ prefix = '', target, suffix = '', duration = 1800, dec
     )
     observer.observe(el)
     return () => observer.disconnect()
-  }, [])
+  }, [active])
 
   const formatted = decimals > 0 ? count.toFixed(decimals) : count
 

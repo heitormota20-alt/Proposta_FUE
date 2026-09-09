@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import styles from './Slide02Mercado.module.css'
 import GradientOrb from '../components/GradientOrb'
-import ParticleField from '../components/ParticleField'
+import GradientBlinds from '../components/GradientBlinds'
 import { CountUp } from '../hooks/useCountUp.jsx'
 
 function LogoValor() {
@@ -15,19 +15,11 @@ function LogoValor() {
 
 function LogoTerra() {
   return (
-    <div className={styles.logoTerra}>
-      <span className={styles.terraText}>terra</span>
-      <svg viewBox="0 0 20 20" width="16" height="16" className={styles.terraOrb}>
-        <defs>
-          <radialGradient id="tg" cx="38%" cy="38%" r="62%">
-            <stop offset="0%"   stopColor="#FFB020" />
-            <stop offset="45%"  stopColor="#FF5500" />
-            <stop offset="100%" stopColor="#C80000" />
-          </radialGradient>
-        </defs>
-        <circle cx="10" cy="10" r="9" fill="url(#tg)" />
-      </svg>
-    </div>
+    <img
+      src="/images/Slide%2002/Terra_Logo.svg"
+      alt="Terra"
+      className={styles.terraLogo}
+    />
   )
 }
 
@@ -62,6 +54,9 @@ export default function Slide02Mercado() {
   const sectionRef = useRef(null)
   const hasVisited = useRef(false)
   const [phase, setPhase] = useState('idle') // 'idle' | 'in' | 'out'
+  // Trava em true assim que o usuário entra no slide — os big numbers só
+  // disparam a contagem a partir daqui, e nunca mais resetam.
+  const [entered, setEntered] = useState(false)
 
   useEffect(() => {
     const el = sectionRef.current
@@ -71,6 +66,7 @@ export default function Slide02Mercado() {
         if (entry.isIntersecting) {
           hasVisited.current = true
           setPhase('in')
+          setEntered(true)
         } else if (hasVisited.current) {
           setPhase('out')
         }
@@ -83,7 +79,24 @@ export default function Slide02Mercado() {
 
   return (
     <section ref={sectionRef} className={`slide ${styles.slide}`}>
-      <ParticleField count={55} connectDist={140} />
+      <div className={styles.grainientBg}>
+        <GradientBlinds
+          gradientColors={['#10B981', '#10B981']}
+          color1="#10B981"
+          color2="#10B981"
+          angle={0}
+          noise={0.3}
+          blindCount={28}
+          blindMinWidth={22}
+          spotlightRadius={0.35}
+          spotlightSoftness={1}
+          spotlightOpacity={1}
+          mouseDampening={0.15}
+          distortAmount={0}
+          shineDirection="left"
+          mixBlendMode="lighten"
+        />
+      </div>
       <GradientOrb variant="teal" size={500} top={-160} right={-120} opacity={0.22} />
       <GradientOrb variant="teal" size={300} bottom={-80} left={-60}  opacity={0.15} />
 
@@ -117,6 +130,7 @@ export default function Slide02Mercado() {
                   target={card.number}
                   suffix={card.suffix}
                   duration={1600}
+                  active={entered}
                 />
               </div>
               <p className={styles.cardStatLabel}>{card.label}</p>

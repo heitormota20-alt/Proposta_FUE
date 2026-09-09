@@ -1,53 +1,70 @@
 import styles from './Slide13Estrutura.module.css'
-import GradientOrb from '../components/GradientOrb'
+import AccordionGallery from '../components/AccordionGallery'
+import GradientBlinds from '../components/GradientBlinds'
 
-export default function Slide13Estrutura() {
-  const items = [
-    {
-      icon: '🔥',
-      label: 'Treinamento Presencial Hands On',
-      desc: '1 dia teórico e 2 dias imersivos na Clínica vivenciando cirurgias reais',
-    },
-    {
-      icon: '📍',
-      label: 'Encontros Presenciais de Fellow',
-      desc: '6 dias divididos em 3 meses (você e mais um aluno) acompanhando os bastidores da clínica',
-    },
-    {
-      icon: '💻',
-      label: 'Conteúdo Online Exclusivo',
-      desc: 'Ultramar Clinic & Ultramar Business — da técnica à gestão completa do negócio',
-    },
-    {
-      icon: '👨‍💻',
-      label: '5 Encontros Ao Vivo em Grupo',
-      desc: 'Sessões de aprofundamento e tira-dúvidas direto com Dr. Rafael',
-    },
-  ]
+const topicImages = [
+  '/images/Slide_17/Img-01.png',
+  '/images/Slide_17/Img-02.png',
+  '/images/Slide_17/Img-03.png',
+  '/images/Slide_17/Img-04.png',
+  '/images/Slide_17/Img-05.jpg',
+]
 
+const galleryItems = [
+  { image: topicImages[0], label: 'Acompanhamento integral de cirurgias reais' },
+  { image: topicImages[1], label: 'Organização e estruturação de uma equipe cirúrgica eficiente' },
+  { image: topicImages[2], label: 'Revisão detalhada dos procedimentos executados' },
+  { image: topicImages[3], label: 'Direcionamento contínuo sobre postura, técnica e abordagem clínica' },
+  { image: topicImages[4], label: 'Execução supervisionada de técnicas do transplante capilar' },
+]
+
+export const SLIDE13_STEPS = galleryItems.length
+
+export default function Slide13Estrutura({ galleryIndex = 0, onGalleryIndexChange }) {
   return (
     <section className={`slide ${styles.slide}`}>
-      <GradientOrb variant="teal" size={600} top="-10%" right="-10%" opacity={0.18} />
-
+      <div className={styles.grainientBg}>
+        <GradientBlinds
+          gradientColors={['#10B981', '#10B981']}
+          color1="#10B981"
+          color2="#10B981"
+          angle={0}
+          noise={0.3}
+          blindCount={28}
+          blindMinWidth={22}
+          spotlightRadius={0.35}
+          spotlightSoftness={1}
+          spotlightOpacity={1}
+          mouseDampening={0.15}
+          distortAmount={0}
+          shineDirection="left"
+          mixBlendMode="lighten"
+        />
+      </div>
       <div className={styles.inner}>
+
         <div className={styles.header}>
-          <span className={styles.eyebrow}>Resumo Completo</span>
-          <h2 className={styles.title}>
-            Estrutura da <em className={styles.accent}>Formação</em>
-          </h2>
+          <span className={styles.badge}>E que nenhum concorrente tem</span>
+          <h1 className={styles.title}>O acesso presencial que você procura</h1>
         </div>
 
-        <div className={styles.grid}>
-          {items.map((item, i) => (
-            <div key={i} className={styles.card}>
-              <span className={styles.cardIcon}>{item.icon}</span>
-              <div>
-                <h3 className={styles.cardLabel}>{item.label}</h3>
-                <p className={styles.cardDesc}>{item.desc}</p>
-              </div>
-            </div>
-          ))}
+        <div className={styles.galleryWrap}>
+          <AccordionGallery
+            items={galleryItems}
+            activeIndex={galleryIndex}
+            onActiveChange={onGalleryIndexChange}
+            defaultIndex={0}
+            expandRatio={0.42}
+            trigger="hover"
+            height={460}
+            gap={8}
+            radius={16}
+            accentColor="#15bc85"
+            overlayColor="#060010"
+            textColor="#ffffff"
+          />
         </div>
+
       </div>
     </section>
   )

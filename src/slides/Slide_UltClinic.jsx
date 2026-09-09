@@ -1,36 +1,31 @@
 import styles from './Slide_UltClinic.module.css'
 import GradientOrb from '../components/GradientOrb'
 
-const modulos = [
-  'Fundamentos e anatomia do couro cabeludo',
-  'Técnica FUE passo a passo — extração e implante',
-  'Planejamento cirúrgico e densidade capilar',
-  'Manejo de complicações e cuidados pós-operatórios',
-  'Protocolo de atendimento e encantamento do paciente',
-  'Casos clínicos comentados em vídeo com Dr. Rafael',
-]
-
 export default function SlideUltClinic() {
   return (
     <section className={`slide ${styles.slide}`}>
-      <GradientOrb variant="teal" size={600} top="-10%" right="-10%" opacity={0.18} />
+      <GradientOrb variant="teal" size={700} top="0%" left="-15%" opacity={0.18} />
 
       <div className={styles.inner}>
-        <div className={styles.header}>
-          <span className={styles.badge}>ONLINE · TRILHA 01</span>
-          <h2 className={styles.title}>Ultramar <em className={styles.accent}>Clinic</em></h2>
-          <p className={styles.sub}>
-            Metodologia de aceleração clínica para médicos que querem dominar as melhores técnicas de cirurgia para transplante capilar.
-          </p>
+        {/* ── Espaço reservado para o vídeo (a enviar) ── */}
+        <div className={styles.left}>
+          <div className={styles.videoSlot}>
+            <span className={styles.videoLabel}>VÍDEO</span>
+          </div>
         </div>
 
-        <div className={styles.grid}>
-          {modulos.map((m, i) => (
-            <div key={i} className={styles.item}>
-              <span className={styles.itemNum}>0{i + 1}</span>
-              <span className={styles.itemText}>{m}</span>
-            </div>
-          ))}
+        <div className={styles.right}>
+          <span className={styles.eyebrow}>Resultado real · Turma 1</span>
+          <h2 className={styles.title}>
+            O <em className={styles.accent}>Dr. Felipe</em><br />nunca havia pego num bisturi.
+          </h2>
+          <p className={styles.body}>
+            Depois dos primeiros Hands On na clínica do Dr. Rafael, sua evolução foi transformadora — da teoria à prática cirúrgica em poucos dias.
+          </p>
+          <div className={styles.quote}>
+            "Entrei sem nunca ter feito uma cirurgia. Saí pronto para operar."
+            <span className={styles.quoteAuthor}>— Dr. Felipe, Turma 1</span>
+          </div>
         </div>
       </div>
     </section>

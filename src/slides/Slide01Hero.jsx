@@ -6,7 +6,7 @@ export default function Slide01Hero() {
 
       {/* ── Vídeo de fundo em loop ── */}
       <video
-        src="/images/Hair_follicle_swaying_gently_202609081827.mp4"
+        src="/images/Hair_follicle_grows_upward_202609091156.mp4"
         className={styles.bg}
         autoPlay
         muted
@@ -18,11 +18,6 @@ export default function Slide01Hero() {
 
       {/* Overlay: escurece bordas, preserva o folículo central */}
       <div className={styles.overlay} aria-hidden="true" />
-
-      {/* ── Topo ── */}
-      <header className={styles.header}>
-        <span className={styles.headerTag}>Proposta Comercial · Turma 4</span>
-      </header>
 
       {/* ── Rodapé ── */}
       <footer className={styles.footer}>

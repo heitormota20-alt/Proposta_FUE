@@ -1,4 +1,4 @@
-.slide { --accent: #00DDD0; background: var(--surface-0); overflow: hidden; }
+.slide { --accent: #15bc85; background: var(--surface-0); overflow: hidden; }
 
 .inner {
   position: relative; z-index: 2;
@@ -32,8 +32,8 @@
 }
 
 .optionMain {
-  border-color: rgba(0,221,208,0.35);
-  background: rgba(0,221,208,0.05);
+  border-color: rgba(21, 188, 133,0.35);
+  background: rgba(21, 188, 133,0.05);
 }
 
 .optionTag {

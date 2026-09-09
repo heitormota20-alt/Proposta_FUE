@@ -1,32 +1,32 @@
 import styles from './Slide15BonusConcierge.module.css'
-import GradientOrb from '../components/GradientOrb'
+
+const bullets = [
+  'Uma plataforma educacional com experiência estilo Netflix',
+  'Mais de 40 horas de conteúdos para você assistir e reassistir a qualquer momento e de onde estiver (seja pelo computador ou pelo celular)',
+  'Duas trilhas de aprendizado focadas em fazer você evoluir como cirurgião e empresário',
+]
 
 export default function Slide15BonusConcierge() {
-  const items = [
-    'Gestão das datas de Encontros Presenciais',
-    'Auxílio com translados, hospedagem e estadia do mentorado',
-    'Acompanhamento de Resultados',
-    'Suporte para dúvidas e dificuldades',
-  ]
-
   return (
     <section className={`slide ${styles.slide}`}>
-      <GradientOrb variant="teal" size={600} top="-5%" right="-5%" opacity={0.18} />
+      <img
+        src="/images/Slide_19/imagem-01.webp"
+        alt=""
+        className={styles.bg}
+        aria-hidden="true"
+      />
+      <div className={styles.overlay} aria-hidden="true" />
 
       <div className={styles.inner}>
-        <div className={styles.bonusTag}>BÔNUS 01</div>
-
-        <div className={styles.content}>
-          <h2 className={styles.title}>
-            Concierge <em className={styles.accent}>Pessoal</em>
-          </h2>
-          <p className={styles.body}>
-            Você terá um Concierge dedicado a acompanhar seus resultados e te ajudar com qualquer tipo de dificuldade durante toda a sua jornada.
-          </p>
+        <div className={styles.left}>
+          <span className={styles.badge}>ONLINE</span>
+          <h1 className={styles.title}>
+            Conteúdos elaborados para te transformar em um profissional de ponta.
+          </h1>
           <ul className={styles.list}>
-            {items.map((item, i) => (
+            {bullets.map((item, i) => (
               <li key={i} className={styles.item}>
-                <span className={styles.check}>→</span>
+                <span className={styles.dot} />
                 {item}
               </li>
             ))}

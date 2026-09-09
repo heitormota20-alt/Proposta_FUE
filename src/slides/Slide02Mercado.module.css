@@ -1,4 +1,12 @@
-.slide { --accent: #00DDD0; background: var(--surface-0); overflow: hidden; }
+.slide { --accent: #15bc85; background: var(--surface-0); overflow: hidden; }
+
+/* ── Background Grainient — textura sutil atrás do conteúdo ── */
+.grainientBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.22;
+}
 
 .inner {
   position: relative;
@@ -119,7 +127,7 @@
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0,221,208,0.5), transparent);
+  background: linear-gradient(90deg, transparent, rgba(21, 188, 133,0.5), transparent);
   opacity: 0;
   transition: opacity 300ms ease;
 }
@@ -170,46 +178,42 @@
   color: rgba(255,255,255,0.55);
 }
 
-/* ─── Logo do portal ─────────────────────────────────── */
-.cardLogo { margin-top: auto; padding-top: var(--space-3); }
+/* ─── Logo do portal — maiores, monocromáticos em branco ─── */
+.cardLogo { margin-top: auto; padding-top: var(--space-4); }
 
 .logoValor {
   display: inline-flex;
   flex-direction: column;
-  background: #007A78;
-  border-radius: 3px;
-  padding: 4px 8px 3px;
   line-height: 1;
+  opacity: 0.92;
 }
 
 .valorEco {
   font-family: var(--font-body);
-  font-size: 0.4375rem;
+  font-size: 0.625rem;
   font-weight: 400;
-  color: rgba(255,255,255,0.85);
-  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 .valorText {
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 700;
   font-style: italic;
   color: #FFF;
-  line-height: 1;
+  line-height: 1.1;
 }
 
-.logoTerra { display: inline-flex; align-items: center; gap: 4px; }
-
-.terraText {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--white);
+.terraLogo {
+  height: 26px;
+  width: auto;
+  display: block;
+  opacity: 0.92;
+  /* Converte o logo multicolor para branco sólido */
+  filter: brightness(0) invert(1);
 }
-
-.terraOrb { flex-shrink: 0; }
 
 /* ─── Divisor + quote ────────────────────────────────── */
 .cardDivider {

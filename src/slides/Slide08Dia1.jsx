@@ -1,37 +1,66 @@
 import styles from './Slide08Dia1.module.css'
-import GradientOrb from '../components/GradientOrb'
+import AccordionGallery from '../components/AccordionGallery'
+import GradientBlinds from '../components/GradientBlinds'
 
-export default function Slide08Dia1() {
-  const items = [
-    'Marketing, Posicionamento e Produção de Conteúdo',
-    'Entrega do Kit de Onboarding Exclusivo',
-    'Networking e Conversas com o Dr. Rafael e os outros alunos',
-    'LTV no Mercado de Transplante Capilar',
-    'Identidade e Branding · Mercado Digital',
-  ]
+const galleryItems = [
+  { image: '/images/Slide_09/IMG_01.png', label: 'Marketing, Posicionamento e Produção de Conteúdo · Identidade e Branding no Mercado Digital' },
+  { image: '/images/Slide_09/IMG_02.png', label: 'Entrega do Kit de Onboarding Exclusivo' },
+  { image: '/images/Slide_09/IMG_03.jpg', label: 'Networking e Conversas com o Dr. Rafael e os outros alunos · LTV no Mercado de Transplante Capilar' },
+]
 
+export const SLIDE08_STEPS = galleryItems.length
+
+export default function Slide08Dia1({ galleryIndex = 0, onGalleryIndexChange }) {
   return (
     <section className={`slide ${styles.slide}`}>
-      <GradientOrb variant="teal" size={600} bottom="-10%" right="-10%" opacity={0.2} />
-
+      <div className={styles.grainientBg}>
+        <GradientBlinds
+          gradientColors={['#10B981', '#10B981']}
+          color1="#10B981"
+          color2="#10B981"
+          angle={0}
+          noise={0.3}
+          blindCount={28}
+          blindMinWidth={22}
+          spotlightRadius={0.35}
+          spotlightSoftness={1}
+          spotlightOpacity={1}
+          mouseDampening={0.15}
+          distortAmount={0}
+          shineDirection="left"
+          mixBlendMode="lighten"
+        />
+      </div>
       <div className={styles.inner}>
+
+        {/* ── Cabeçalho no topo ── */}
         <div className={styles.header}>
-          <span className={styles.partTag}>PRESENCIAL · PARTE 01</span>
-          <h2 className={styles.title}>
+          <span className={styles.badge}>PRESENCIAL · PARTE 01</span>
+          <h1 className={styles.title}>
             Um rooftop fechado para{' '}
             <em className={styles.accent}>1 dia inteiro</em>{' '}
             de mentorias sobre negócios.
-          </h2>
+          </h1>
         </div>
 
-        <div className={styles.grid}>
-          {items.map((item, i) => (
-            <div key={i} className={styles.item}>
-              <span className={styles.itemNum}>0{i + 1}</span>
-              <span className={styles.itemText}>{item}</span>
-            </div>
-          ))}
+        {/* ── Galeria em acordeão ao centro ── */}
+        <div className={styles.galleryWrap}>
+          <AccordionGallery
+            items={galleryItems}
+            activeIndex={galleryIndex}
+            onActiveChange={onGalleryIndexChange}
+            defaultIndex={0}
+            expandRatio={0.52}
+            trigger="hover"
+            height={440}
+            gap={10}
+            radius={16}
+            accentColor="#15bc85"
+            overlayColor="#060010"
+            textColor="#ffffff"
+          />
         </div>
+
       </div>
     </section>
   )
