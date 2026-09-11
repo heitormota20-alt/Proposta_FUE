@@ -227,47 +227,34 @@ export default function CursorGrid({
     }
     wakeRef.current = wake
 
-    const toLocal = (e) => {
-      const rect = canvas.getBoundingClientRect()
-      return [e.clientX - rect.left, e.clientY - rect.top]
-    }
-
-    const onPointerMove = (e) => {
-      const [x, y] = toLocal(e)
-      energize(x, y)
-      wake()
-    }
-
-    const onPointerDown = (e) => {
-      if (!propsRef.current.clickPulse) return
-      const [x, y] = toLocal(e)
-      pulses.push({ x, y, t0: performance.now() })
-      wake()
+    const staticFill = () => {
+      const p = propsRef.current
+      for (let i = 0; i < alphas.length; i++) {
+        alphas[i] = p.maxOpacity
+        touched[i] = Infinity
+      }
     }
 
     const ro = new ResizeObserver(() => {
       rebuild()
+      staticFill()
       wake()
     })
     ro.observe(container)
     rebuild()
+    staticFill()
     wake()
-
-    container.addEventListener('pointermove', onPointerMove)
-    container.addEventListener('pointerdown', onPointerDown)
 
     return () => {
       cancelAnimationFrame(raf)
       ro.disconnect()
-      container.removeEventListener('pointermove', onPointerMove)
-      container.removeEventListener('pointerdown', onPointerDown)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cellSize])
 
   useEffect(() => {
     wakeRef.current?.()
-  }, [gridOpacity, color, lineWidth, maxOpacity, fillOpacity, cellRadius])
+  }, [gridOpacity, color, lineWidth, maxOpacity, fillOpacity, cellRadius, cellSize])
 
   return (
     <div ref={containerRef} className={`${styles.container} ${className}`.trim()}>

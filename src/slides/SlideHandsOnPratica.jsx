@@ -3,13 +3,13 @@ import AccordionGallery from '../components/AccordionGallery'
 import GradientBlinds from '../components/GradientBlinds'
 
 const galleryItems = [
-  { image: '/images/Slide_10/img-01.jpg', label: 'Identidade e Branding' },
-  { image: '/images/Slide_10/img-02.jpg', label: 'Produção de Conteúdo' },
-  { image: '/images/Slide_10/img-03.jpg', label: 'Marketing e Conversão' },
-  { image: '/images/Slide_10/img-04.jpg', label: 'Mercado Digital de Forma Estratégica' },
-  { image: '/images/Slide_10/img-05.jpg', label: 'LTV no Mercado de Transplante Capilar' },
-  { image: '/images/Slide_10/img-06.jpg', label: 'Encantamento do Cliente' },
-  { image: '/images/Slide_10/img-07.jpg', label: 'Técnica + Planejamento Cirúrgico' },
+  { image: '/images/Slide_10/img-01.jpg', tagline: 'Dr. Rafael Ultramar', label: 'Identidade e Branding' },
+  { image: '/images/Slide_10/img-02.jpg', tagline: 'Guto Galamba',         label: 'Produção de Conteúdo' },
+  { image: '/images/Slide_10/img-03.jpg', tagline: 'Daniel Lara',          label: 'Marketing e Conversão' },
+  { image: '/images/Slide_10/img-04.jpg', tagline: 'Filippe Holze',        label: 'Mercado Digital de Forma Estratégica' },
+  { image: '/images/Slide_10/img-05.jpg', tagline: 'Dra. Priscila Barreto',  label: 'LTV no Mercado de Transplante Capilar' },
+  { image: '/images/Slide_10/img-06.jpg', tagline: 'Dr. Rafael Ultramar',   label: 'Encantamento do Cliente' },
+  { image: '/images/Slide_10/img-07.jpg', tagline: 'Dr. Rafael Ultramar',   label: 'Técnica + Planejamento Cirúrgico' },
 ]
 
 export const SLIDE_HANDSON_STEPS = galleryItems.length
@@ -38,11 +38,10 @@ export default function SlideHandsOnPratica({ galleryIndex = 0, onGalleryIndexCh
       <div className={styles.inner}>
 
         <div className={styles.header}>
-          <span className={styles.badge}>PRESENCIAL · PARTE 02</span>
+          <span className={styles.badge}>PRESENCIAL · PARTE 01</span>
           <h1 className={styles.title}>
-            Imersão de <em className={styles.accent}>Hands-On</em> Prática
+            Veja alguns <em className={styles.accent}>palestrantes</em> que já passaram pelo FUE
           </h1>
-          <p className={styles.sub}>3 dias de treinamento intensivo na clínica do Dr. Rafael Ultramar.</p>
         </div>
 
         <div className={styles.galleryWrap}>
@@ -59,6 +58,13 @@ export default function SlideHandsOnPratica({ galleryIndex = 0, onGalleryIndexCh
             accentColor="#15bc85"
             overlayColor="#060010"
             textColor="#ffffff"
+            labelStyle={{
+              fontSize: 'clamp(0.7rem, 0.85vw, 0.875rem)',
+              textTransform: 'none',
+              letterSpacing: '0.01em',
+              lineHeight: '1.45',
+              textWrap: 'pretty',
+            }}
           />
         </div>
 

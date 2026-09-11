@@ -2,7 +2,15 @@ import styles from './Slide06Programa.module.css'
 import GradientOrb from '../components/GradientOrb'
 import CursorGrid from '../components/CursorGrid'
 
-export default function Slide06Programa() {
+const bullets = [
+  'Turmas exclusivas\nNo máximo 10 alunos',
+  'Da prática capilar aos\nbastidores de uma clínica\nnuma visão de negócio',
+  '6 meses de\nacompanhamento próximo',
+]
+
+export const SLIDE06_STEPS = bullets.length
+
+export default function Slide06Programa({ revealedUpTo = -1 }) {
   return (
     <section className={`slide ${styles.slide}`}>
       {/* ── Fundo — troque por public/images/Slide_06/bg.jpg quando disponível ── */}
@@ -44,17 +52,21 @@ export default function Slide06Programa() {
           {' '}ao mais avançado do <strong>Transplante Capilar</strong>.
         </p>
 
-        {/* ── Bullets ── */}
+        {/* ── Bullets — aparecem um a um de baixo para cima como pilares ── */}
         <div className={styles.bullets}>
-          <p className={styles.bulletCol}>
-            Turmas exclusivas<br />No máximo 10 alunos
-          </p>
-          <p className={styles.bulletCol}>
-            Da prática capilar aos<br />bastidores de uma clínica<br />numa visão de negócio
-          </p>
-          <p className={styles.bulletCol}>
-            6 meses de<br />acompanhamento próximo
-          </p>
+          {bullets.map((text, i) => (
+            <div
+              key={i}
+              className={`${styles.bulletWrap} ${i <= revealedUpTo ? styles.bullet_in : styles.bullet_idle}`}
+            >
+              <div className={styles.pillarBar} />
+              <p className={styles.bulletCol}>
+                {text.split('\n').map((line, j, arr) => (
+                  <span key={j}>{line}{j < arr.length - 1 && <br />}</span>
+                ))}
+              </p>
+            </div>
+          ))}
         </div>
 
       </div>

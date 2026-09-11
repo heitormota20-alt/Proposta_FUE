@@ -25,9 +25,9 @@ export default function Slide10Fellowship() {
       <div className={styles.inner}>
 
         <div className={styles.card}>
-          <span className={styles.badge}>PARTE 03 · CIRURGIA NO SHAVE</span>
+          <span className={styles.badge}>PARTE 02 E 03 · HANDS ON</span>
           <h1 className={styles.title}>Presencial</h1>
-          <p className={styles.sub}>Dia 2 de Hands on na clínica Dr. Rafael Ultramar.</p>
+          <p className={styles.sub}>2 dias de Hands On na clínica do Dr. Rafael Ultramar.</p>
         </div>
 
       </div>

@@ -4,11 +4,11 @@ import ProgressIndicator from './components/ProgressIndicator'
 import NavArrows from './components/NavArrows'
 
 import Slide01Hero from './slides/Slide01Hero'
-import Slide02Mercado from './slides/Slide02Mercado'
+import Slide02Mercado, { SLIDE02_STEPS } from './slides/Slide02Mercado'
 import Slide03Quem, { SLIDE03_STEPS } from './slides/Slide03Quem'
 import Slide04Jornada from './slides/Slide04Jornada'
 import Slide05Quote from './slides/Slide05Quote'
-import Slide06Programa from './slides/Slide06Programa'
+import Slide06Programa, { SLIDE06_STEPS } from './slides/Slide06Programa'
 import Slide07Presencial, { SLIDE07_STEPS } from './slides/Slide07Presencial'
 import Slide3DiasIntro from './slides/Slide_3DiasIntro'
 import Slide08Dia1, { SLIDE08_STEPS } from './slides/Slide08Dia1'
@@ -17,12 +17,13 @@ import SlideHandsOnPratica, { SLIDE_HANDSON_STEPS } from './slides/SlideHandsOnP
 import SlideFelipe from './slides/Slide_Felipe'
 import Slide10Fellowship from './slides/Slide10Fellowship'
 import Slide11Online, { SLIDE11_STEPS } from './slides/Slide11Online'
+import Slide15HandsOn, { SLIDE15_STEPS } from './slides/Slide15HandsOn'
 import SlideUltClinic from './slides/Slide_UltClinic'
 import SlideUltBusiness from './slides/Slide_UltBusiness'
 import Slide12Mentorias, { SLIDE12_STEPS } from './slides/Slide12Mentorias'
 import Slide13Estrutura, { SLIDE13_STEPS } from './slides/Slide13Estrutura'
-import Slide14Bonus from './slides/Slide14Bonus'
-import Slide15BonusConcierge from './slides/Slide15BonusConcierge'
+import Slide14Bonus, { SLIDE14_STEPS } from './slides/Slide14Bonus'
+import Slide15BonusConcierge, { SLIDE_CONCIERGE_STEPS } from './slides/Slide15BonusConcierge'
 import Slide16BonusAcelerador from './slides/Slide16BonusAcelerador'
 import Slide17BonusWorkshop from './slides/Slide17BonusWorkshop'
 import Slide18Recap from './slides/Slide18Recap'
@@ -42,13 +43,14 @@ const SLIDES = [
   Slide06Programa,       // 06 · O Programa — visão geral das 3 modalidades
   Slide07Presencial,     // 07 · Presencial — operar na clínica do Dr. Rafael
   Slide3DiasIntro,       // 08 · "A formação começa com 3 dias" — intro de seção
-  Slide08Dia1,           // 09 · Dia 1 — Rooftop, mentoria de negócios
-  Slide09HandsOn,        // 10 · Presencial · Parte 01 — Palestras exclusivas com convidados
+  Slide09HandsOn,        // 09 · Presencial · Parte 01 — Palestras exclusivas com convidados
+  Slide08Dia1,           // 10 · Dia 1 — Rooftop, mentoria de negócios
   SlideHandsOnPratica,   // 11 · Presencial · Parte 02 — Imersão de Hands-On Prática
   SlideFelipe,           // 12 · Dr. Felipe — transformação real (Turma 1)
   Slide10Fellowship,     // 13 · Presencial · Parte 03 — Dia 2, Cirurgia No Shave
-  Slide11Online,         // 14 · Presencial · Parte 03 — Hands-On com Cirurgia No Shave
-  SlideUltClinic,        // 15 · Dr. Felipe — transformação real, antes/depois (Turma 1)
+  Slide11Online,         // 14 · Presencial · Parte 02 — Hands-On com Cirurgia com Raspagem
+  Slide15HandsOn,        // 15 · Presencial · Parte 03 — Hands-On com Cirurgia com Raspagem
+  SlideUltClinic,        // 16 · Dr. Felipe — transformação real, antes/depois (Turma 1)
   SlideUltBusiness,      // 16 · Fellowship — jornada acompanhada na clínica
   Slide12Mentorias,      // 17 · Fellowship — 6 fellows, duplas, acompanhamento de casos
   Slide13Estrutura,      // 18 · Fellowship — o acesso presencial que nenhum concorrente tem
@@ -65,9 +67,12 @@ const SLIDES = [
   Slide21Pagamento,      // 29 · Formas de pagamento
 ]
 
-// Posição do Slide03Quem dentro de SLIDES — a seta de avançar, enquanto
-// o usuário estiver aqui, primeiro revela as fotos da timeline uma a uma.
+// Posições dos slides com reveal progressivo.
+const SLIDE02_INDEX = SLIDES.indexOf(Slide02Mercado)
 const SLIDE03_INDEX = SLIDES.indexOf(Slide03Quem)
+const SLIDE06_INDEX = SLIDES.indexOf(Slide06Programa)
+const SLIDE14_INDEX = SLIDES.indexOf(Slide14Bonus)
+const SLIDE_CONCIERGE_INDEX = SLIDES.indexOf(Slide15BonusConcierge)
 
 // Slides com carrossel sanfona (AccordionGallery) — a seta de avançar,
 // enquanto o usuário estiver neles, primeiro expande cada card da galeria
@@ -77,13 +82,18 @@ const GALLERY_SLIDES = [
   { Component: Slide08Dia1, steps: SLIDE08_STEPS },
   { Component: SlideHandsOnPratica, steps: SLIDE_HANDSON_STEPS },
   { Component: Slide11Online, steps: SLIDE11_STEPS },
+  { Component: Slide15HandsOn, steps: SLIDE15_STEPS },
   { Component: Slide12Mentorias, steps: SLIDE12_STEPS },
   { Component: Slide13Estrutura, steps: SLIDE13_STEPS },
 ].map((g) => ({ ...g, index: SLIDES.indexOf(g.Component) }))
 
 export default function App() {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [slide02Revealed, setSlide02Revealed] = useState(-1)
   const [slide03Revealed, setSlide03Revealed] = useState(-1)
+  const [slide06Revealed, setSlide06Revealed] = useState(-1)
+  const [slide14Revealed, setSlide14Revealed] = useState(-1)
+  const [slideConciergeRevealed, setSlideConciergeRevealed] = useState(-1)
   const [galleryIndices, setGalleryIndices] = useState({})
 
   const handleSlideChange = useCallback((index) => {
@@ -99,20 +109,77 @@ export default function App() {
   }, [])
 
   const navigate = (direction) => {
-    // No slide "Quem é o Dr. Rafael", a seta de avançar revela as fotos
-    // da timeline uma por uma antes de seguir para o próximo slide.
-    if (direction === 1 && currentSlide === SLIDE03_INDEX && slide03Revealed < SLIDE03_STEPS - 1) {
-      setSlide03Revealed((prev) => Math.min(prev + 1, SLIDE03_STEPS - 1))
-      return
+    // Slide06: avançar revela bullets um a um; recuar oculta um a um.
+    if (currentSlide === SLIDE06_INDEX) {
+      if (direction === 1 && slide06Revealed < SLIDE06_STEPS - 1) {
+        setSlide06Revealed((prev) => Math.min(prev + 1, SLIDE06_STEPS - 1))
+        return
+      }
+      if (direction === -1 && slide06Revealed >= 0) {
+        setSlide06Revealed((prev) => prev - 1)
+        return
+      }
     }
 
-    // Nos slides com galeria em acordeão, a seta de avançar expande cada
-    // card, um por vez, antes de seguir para o próximo slide.
+    // Slide Concierge: avançar revela bullets um a um; recuar oculta um a um.
+    if (currentSlide === SLIDE_CONCIERGE_INDEX) {
+      if (direction === 1 && slideConciergeRevealed < SLIDE_CONCIERGE_STEPS - 1) {
+        setSlideConciergeRevealed((prev) => Math.min(prev + 1, SLIDE_CONCIERGE_STEPS - 1))
+        return
+      }
+      if (direction === -1 && slideConciergeRevealed >= 0) {
+        setSlideConciergeRevealed((prev) => prev - 1)
+        return
+      }
+    }
+
+    // Slide14: avançar revela pills um a um; recuar oculta um a um.
+    if (currentSlide === SLIDE14_INDEX) {
+      if (direction === 1 && slide14Revealed < SLIDE14_STEPS - 1) {
+        setSlide14Revealed((prev) => Math.min(prev + 1, SLIDE14_STEPS - 1))
+        return
+      }
+      if (direction === -1 && slide14Revealed >= 0) {
+        setSlide14Revealed((prev) => prev - 1)
+        return
+      }
+    }
+
+    // Slide02: avançar revela big numbers um a um; recuar oculta um a um.
+    if (currentSlide === SLIDE02_INDEX) {
+      if (direction === 1 && slide02Revealed < SLIDE02_STEPS - 1) {
+        setSlide02Revealed((prev) => Math.min(prev + 1, SLIDE02_STEPS - 1))
+        return
+      }
+      if (direction === -1 && slide02Revealed >= 0) {
+        setSlide02Revealed((prev) => prev - 1)
+        return
+      }
+    }
+
+    // Slide03: avançar revela fotos uma a uma; recuar oculta uma a uma.
+    if (currentSlide === SLIDE03_INDEX) {
+      if (direction === 1 && slide03Revealed < SLIDE03_STEPS - 1) {
+        setSlide03Revealed((prev) => Math.min(prev + 1, SLIDE03_STEPS - 1))
+        return
+      }
+      if (direction === -1 && slide03Revealed >= 0) {
+        setSlide03Revealed((prev) => prev - 1)
+        return
+      }
+    }
+
+    // Slides com galeria em acordeão: avançar expande um card por vez;
+    // recuar fecha um card por vez, antes de ir ao slide anterior.
     const galleryConfig = GALLERY_SLIDES.find((g) => g.index === currentSlide)
-    if (direction === 1 && galleryConfig) {
+    if (galleryConfig) {
       const cur = galleryIndices[currentSlide] ?? 0
-      if (cur < galleryConfig.steps - 1) {
+      if (direction === 1 && cur < galleryConfig.steps - 1) {
         setGalleryIndexFor(currentSlide, cur + 1)
+        return
+      }
+      if (direction === -1 && cur > 0) {
+        setGalleryIndexFor(currentSlide, cur - 1)
         return
       }
     }
@@ -133,8 +200,16 @@ export default function App() {
         {SLIDES.map((SlideComponent, index) => {
           const galleryConfig = GALLERY_SLIDES.find((g) => g.index === index)
           const extraProps =
-            index === SLIDE03_INDEX
+            index === SLIDE06_INDEX
+              ? { revealedUpTo: slide06Revealed }
+              : index === SLIDE02_INDEX
+              ? { revealedUpTo: slide02Revealed }
+              : index === SLIDE03_INDEX
               ? { revealedUpTo: slide03Revealed, onReveal: revealSlide03 }
+              : index === SLIDE14_INDEX
+              ? { revealedUpTo: slide14Revealed }
+              : index === SLIDE_CONCIERGE_INDEX
+              ? { revealedUpTo: slideConciergeRevealed }
               : galleryConfig
               ? {
                   galleryIndex: galleryIndices[index] ?? 0,

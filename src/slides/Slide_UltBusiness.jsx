@@ -25,7 +25,7 @@ export default function SlideUltBusiness() {
       <div className={styles.inner}>
 
         <div className={styles.card}>
-          <span className={styles.badge}>FELLOWSHIP</span>
+          <span className={styles.badge}>Mas as experiências presenciais não acabam por aí.</span>
           <h1 className={styles.title}>
             Uma <em className={styles.accent}>jornada acompanhada</em>, vivenciando a rotina completa com o Dr. Rafael Ultramar.
           </h1>

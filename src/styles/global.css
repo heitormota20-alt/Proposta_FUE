@@ -28,6 +28,8 @@ html, body, #root {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .slides-track::-webkit-scrollbar {
@@ -47,6 +49,11 @@ html, body, #root {
   padding: clamp(2rem, 5vw, 6rem);
   display: flex;
   flex-direction: column;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  contain: layout paint;
 }
 
 /* ─── Tipografia base ─── */

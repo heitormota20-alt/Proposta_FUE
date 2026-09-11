@@ -276,7 +276,7 @@ export default function Grainient({
 
     const io = new IntersectionObserver(
       ([entry]) => (entry.isIntersecting ? mount() : unmount()),
-      { rootMargin: '0px 100%' }
+      { rootMargin: '0px 300%' }
     )
     io.observe(container)
 

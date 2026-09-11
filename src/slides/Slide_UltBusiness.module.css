@@ -31,10 +31,11 @@
 }
 
 .badge {
-  font-family: var(--font-mono); font-size: 0.6875rem;
-  letter-spacing: 0.25em; color: var(--accent);
-  border: 1px solid var(--accent); border-radius: 4px;
-  padding: var(--space-1) var(--space-3); width: fit-content;
+  font-family: var(--font-mono); font-size: 0.875rem;
+  letter-spacing: 0.06em; color: var(--accent);
+  border: 1px solid var(--accent); border-radius: 6px;
+  padding: var(--space-2) var(--space-4);
+  white-space: nowrap;
 }
 
 .title {

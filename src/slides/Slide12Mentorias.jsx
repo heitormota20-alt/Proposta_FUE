@@ -36,7 +36,7 @@ export default function Slide12Mentorias({ galleryIndex = 0, onGalleryIndexChang
         <div className={styles.header}>
           <span className={styles.badge}>FELLOWSHIP</span>
           <h1 className={styles.title}>
-            Uma jornada acompanhada,<br />de perto, ao seu lado.
+            Veja tudo que está <em className={styles.accent}>incluso</em> nos seus <em className={styles.accent}>Fellows</em>
           </h1>
         </div>
 
@@ -54,6 +54,13 @@ export default function Slide12Mentorias({ galleryIndex = 0, onGalleryIndexChang
             accentColor="#15bc85"
             overlayColor="#060010"
             textColor="#ffffff"
+            labelStyle={{
+              fontSize: 'clamp(0.7rem, 0.85vw, 0.875rem)',
+              textTransform: 'none',
+              letterSpacing: '0.01em',
+              lineHeight: '1.45',
+              textWrap: 'pretty',
+            }}
           />
         </div>
 

@@ -4,7 +4,7 @@ import GradientBlinds from '../components/GradientBlinds'
 
 const galleryItems = [
   { image: '/images/Slide_07/Imagem_03.jpg', label: 'Presencial' },
-  { image: '/images/Slide_07/Imagem_02.png', label: 'Online' },
+  { image: '/images/Slide_07/Imagem_02.png', label: 'Online', imgStyle: { objectFit: 'contain', objectPosition: 'center' }, bottomFade: '#0a0713' },
   { image: '/images/Slide_07/Imagem_01.png', label: 'Ao vivo' },
 ]
 
@@ -42,7 +42,7 @@ export default function Slide07Presencial({ galleryIndex = 0, onGalleryIndexChan
             <br />
             tudo que um médico procura para ser
             <br />
-            um bom cirurgião e um bom empresário, está aqui.
+            <em className={styles.accent}>um bom cirurgião e um bom empresário</em>, está aqui.
           </h1>
         </div>
 

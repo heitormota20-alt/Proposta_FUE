@@ -31,6 +31,7 @@ export default function AccordionGallery({
   trigger = 'hover',
   showLabels = true,
   grayscale = true,
+  labelStyle = {},
   className = '',
 }) {
   const rootRef = useRef(null)
@@ -228,9 +229,17 @@ export default function AccordionGallery({
                   alt={item.alt || item.label || ''}
                   draggable={false}
                   className={styles.img}
+                  style={item.imgStyle}
                 />
               </span>
               <span className={styles.overlay} style={{ background: overlayBg }} aria-hidden="true" />
+              {item.bottomFade && (
+                <span
+                  className={styles.bottomFade}
+                  style={{ background: `linear-gradient(to top, ${item.bottomFade} 0%, transparent 40%)` }}
+                  aria-hidden="true"
+                />
+              )}
             </span>
             {showLabels && (
               <span className={styles.caption} aria-hidden="true">
@@ -248,15 +257,20 @@ export default function AccordionGallery({
                   ref={(el) => {
                     textRefs.current[i] = el
                   }}
-                  className={styles.labelGroup}
+                  className={`${styles.labelGroup}${item.tagline ? ` ${styles.hasTagline}` : ''}`}
                 >
                   {item.statNumber ? (
                     <>
                       <span className={styles.statNumber} style={{ color: accentColor }}>{item.statNumber}</span>
                       <span className={styles.statText} style={{ color: textColor }}>{item.statText}</span>
                     </>
+                  ) : item.tagline ? (
+                    <>
+                      <span className={styles.tagline} style={{ color: accentColor }}>{item.tagline}</span>
+                      <span className={styles.label} style={{ color: textColor, ...labelStyle }}>{item.label}</span>
+                    </>
                   ) : (
-                    <span className={styles.label} style={{ color: textColor }}>{item.label}</span>
+                    <span className={styles.label} style={{ color: textColor, ...labelStyle }}>{item.label}</span>
                   )}
                 </span>
               </span>

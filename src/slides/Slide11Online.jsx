@@ -35,8 +35,8 @@ export default function Slide11Online({ galleryIndex = 0, onGalleryIndexChange }
       <div className={styles.inner}>
 
         <div className={styles.header}>
-          <span className={styles.badge}>PARTE 03 · CIRURGIA NO SHAVE</span>
-          <h1 className={styles.title}>Hands-On com Cirurgia No Shave</h1>
+          <span className={styles.badge}>PRESENCIAL · PARTE 02 (SÁBADO)</span>
+          <h1 className={styles.title}>Hands-On com Cirurgia <em className={styles.accent}>com Raspagem</em></h1>
         </div>
 
         <div className={styles.galleryWrap}>
@@ -53,6 +53,13 @@ export default function Slide11Online({ galleryIndex = 0, onGalleryIndexChange }
             accentColor="#15bc85"
             overlayColor="#060010"
             textColor="#ffffff"
+            labelStyle={{
+              fontSize: 'clamp(0.7rem, 0.85vw, 0.875rem)',
+              textTransform: 'none',
+              letterSpacing: '0.01em',
+              lineHeight: '1.45',
+              textWrap: 'pretty',
+            }}
           />
         </div>
 

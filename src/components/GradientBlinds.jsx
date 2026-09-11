@@ -186,6 +186,7 @@ export default function GradientBlinds({
   shineDirection = 'left',
   mixBlendMode = 'lighten',
   lightMode = false,
+  spotlightOrigin = [0.82, 0.82],
 }) {
   const containerRef = useRef(null)
   const ctxRef = useRef(null)
@@ -263,8 +264,8 @@ export default function GradientBlinds({
 
         if (firstResizeRef.current) {
           firstResizeRef.current = false
-          const cx = gl.drawingBufferWidth / 2
-          const cy = gl.drawingBufferHeight / 2
+          const cx = gl.drawingBufferWidth * spotlightOrigin[0]
+          const cy = gl.drawingBufferHeight * spotlightOrigin[1]
           uniforms.iMouse.value = [cx, cy]
           mouseTargetRef.current = [cx, cy]
         }
@@ -274,35 +275,18 @@ export default function GradientBlinds({
       ro.observe(container)
       resize()
 
-      const onPointerMove = (e) => {
-        const rect = canvas.getBoundingClientRect()
-        const scale = renderer.dpr || 1
-        const x = (e.clientX - rect.left) * scale
-        const y = (rect.height - (e.clientY - rect.top)) * scale
-        mouseTargetRef.current = [x, y]
-        if (mouseDampening <= 0) {
-          uniforms.iMouse.value = [x, y]
-        }
-      }
-      canvas.addEventListener('pointermove', onPointerMove)
-
       const loop = (t) => {
         raf = requestAnimationFrame(loop)
-        uniforms.iTime.value = t * 0.001
-        if (mouseDampening > 0) {
-          if (!lastTimeRef.current) lastTimeRef.current = t
-          const dt = (t - lastTimeRef.current) / 1000
-          lastTimeRef.current = t
-          const tau = Math.max(1e-4, mouseDampening)
-          let factor = 1 - Math.exp(-dt / tau)
-          if (factor > 1) factor = 1
-          const target = mouseTargetRef.current
-          const cur = uniforms.iMouse.value
-          cur[0] += (target[0] - cur[0]) * factor
-          cur[1] += (target[1] - cur[1]) * factor
-        } else {
-          lastTimeRef.current = t
-        }
+        const sec = t * 0.001
+        uniforms.iTime.value = sec
+
+        // Oscila o spotlight entre topo-direita (0.82) e inferior-esquerda (0.18)
+        const f = Math.sin(sec * 0.28) * 0.5 + 0.5  // período ~22 s
+        uniforms.iMouse.value = [
+          gl.drawingBufferWidth  * (0.18 + f * 0.64),
+          gl.drawingBufferHeight * (0.18 + f * 0.64),
+        ]
+
         if (!paused) {
           try {
             renderer.render({ scene: mesh })
@@ -313,7 +297,7 @@ export default function GradientBlinds({
       }
       if (isPageVisible) raf = requestAnimationFrame(loop)
 
-      ctxRef.current = { renderer, gl, canvas, program, mesh, ro, onPointerMove }
+      ctxRef.current = { renderer, gl, canvas, program, mesh, ro }
     }
 
     const unmount = () => {
@@ -324,7 +308,6 @@ export default function GradientBlinds({
         raf = 0
       }
       ctx.ro.disconnect()
-      ctx.canvas.removeEventListener('pointermove', ctx.onPointerMove)
       try {
         container.removeChild(ctx.canvas)
       } catch {
@@ -337,7 +320,7 @@ export default function GradientBlinds({
 
     const io = new IntersectionObserver(
       ([entry]) => (entry.isIntersecting ? mount() : unmount()),
-      { rootMargin: '0px 100%' }
+      { rootMargin: '0px 300%' }
     )
     io.observe(container)
 
@@ -348,7 +331,13 @@ export default function GradientBlinds({
       if (isPageVisible && raf === 0) {
         const loop = (t) => {
           raf = requestAnimationFrame(loop)
-          ctx.program.uniforms.iTime.value = t * 0.001
+          const sec = t * 0.001
+          ctx.program.uniforms.iTime.value = sec
+          const f = Math.sin(sec * 0.28) * 0.5 + 0.5
+          ctx.program.uniforms.iMouse.value = [
+            ctx.gl.drawingBufferWidth  * (0.18 + f * 0.64),
+            ctx.gl.drawingBufferHeight * (0.18 + f * 0.64),
+          ]
           if (!paused) {
             try {
               ctx.renderer.render({ scene: ctx.mesh })
@@ -378,7 +367,6 @@ export default function GradientBlinds({
     noise,
     blindCount,
     blindMinWidth,
-    mouseDampening,
     mirrorGradient,
     spotlightRadius,
     spotlightSoftness,

@@ -51,21 +51,76 @@
 
 .subtitle strong { color: var(--white); font-weight: 700; }
 
-/* ── Bullets — texto simples, colunas próximas ── */
+/* ── Bullets — pilares crescendo de baixo para cima ── */
 .bullets {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: center;
   gap: var(--space-5);
   flex-wrap: wrap;
 }
 
+.bulletWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+  padding: var(--space-4) var(--space-5);
+  will-change: transform, opacity;
+}
+
+.pillarBar {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px 10px 0 0;
+  background: linear-gradient(
+    to top,
+    rgba(21, 188, 133, 0.28) 0%,
+    rgba(21, 188, 133, 0.10) 55%,
+    rgba(21, 188, 133, 0.02) 100%
+  );
+  border: 1px solid rgba(21, 188, 133, 0.18);
+  border-bottom: none;
+  transform-origin: bottom center;
+  transform: scaleY(0);
+  pointer-events: none;
+}
+
 .bulletCol {
+  position: relative;
+  z-index: 1;
   font-family: var(--font-body); font-weight: 700;
   font-size: clamp(0.8125rem, 0.95vw, 0.9375rem);
-  color: var(--accent);
+  color: var(--white);
+  font-style: italic;
   line-height: 1.4;
   max-width: 22ch;
+  text-align: center;
+}
+
+.bullet_idle {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.bullet_in {
+  animation: pillarUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.bullet_in .pillarBar {
+  animation: pillarGrow 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes pillarUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pillarGrow {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
 }
 
 /* ── Mobile ── */

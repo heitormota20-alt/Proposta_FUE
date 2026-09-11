@@ -11,11 +11,11 @@ const topicImages = [
 ]
 
 const galleryItems = [
-  { image: topicImages[0], label: 'Acompanhamento integral de cirurgias reais' },
-  { image: topicImages[1], label: 'Organização e estruturação de uma equipe cirúrgica eficiente' },
-  { image: topicImages[2], label: 'Revisão detalhada dos procedimentos executados' },
-  { image: topicImages[3], label: 'Direcionamento contínuo sobre postura, técnica e abordagem clínica' },
-  { image: topicImages[4], label: 'Execução supervisionada de técnicas do transplante capilar' },
+  { image: topicImages[0], label: 'Acompanhamento integral de cirurgias reais' },
+  { image: topicImages[1], label: 'Organização e estruturação de uma equipe cirúrgica eficiente' },
+  { image: topicImages[2], label: 'Revisão detalhada dos procedimentos executados' },
+  { image: topicImages[3], label: 'Direcionamento contínuo sobre postura, técnica e abordagem clínica' },
+  { image: topicImages[4], label: 'Execução supervisionada de técnicas do transplante capilar' },
 ]
 
 export const SLIDE13_STEPS = galleryItems.length
@@ -45,7 +45,7 @@ export default function Slide13Estrutura({ galleryIndex = 0, onGalleryIndexChang
 
         <div className={styles.header}>
           <span className={styles.badge}>E que nenhum concorrente tem</span>
-          <h1 className={styles.title}>O acesso presencial que você procura</h1>
+          <h1 className={styles.title}>O acesso <em className={styles.accent}>presencial</em> que você procura</h1>
         </div>
 
         <div className={styles.galleryWrap}>
@@ -62,6 +62,13 @@ export default function Slide13Estrutura({ galleryIndex = 0, onGalleryIndexChang
             accentColor="#15bc85"
             overlayColor="#060010"
             textColor="#ffffff"
+            labelStyle={{
+              fontSize: 'clamp(0.7rem, 0.85vw, 0.875rem)',
+              textTransform: 'none',
+              letterSpacing: '0.01em',
+              lineHeight: '1.45',
+              textWrap: 'pretty',
+            }}
           />
         </div>
 

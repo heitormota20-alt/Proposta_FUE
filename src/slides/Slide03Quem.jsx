@@ -26,7 +26,7 @@ const events = [
     period: 'Se mudou para São Paulo para fazer',
     title: 'residência médica',
     desc: 'com foco em Cirurgia Plástica.',
-    photo: '/images/Slide_03/Img-04.png',
+    photo: '/images/Slide_03/Img-04.jpg',
   },
   {
     period: 'Conheceu a área de',
@@ -54,14 +54,14 @@ export default function Slide03Quem({ revealedUpTo = -1, onReveal }) {
     if (!el) return
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.intersectionRatio >= 0.45) {
           hasVisited.current = true
           setPhase('in')
-        } else if (hasVisited.current) {
+        } else if (entry.intersectionRatio < 0.05 && hasVisited.current) {
           setPhase('out')
         }
       },
-      { threshold: 0.45 }
+      { threshold: [0, 0.05, 0.45, 1] }
     )
     io.observe(el)
     return () => io.disconnect()
@@ -110,8 +110,8 @@ export default function Slide03Quem({ revealedUpTo = -1, onReveal }) {
               return (
                 <div
                   key={i}
-                  className={`${styles.photoCell} ${styles[`photo_${phase}`]}`}
-                  style={{ '--delay': `${i * 110 + 120}ms` }}
+                  className={`${styles.photoCell} ${i <= revealedUpTo ? styles.photo_in : styles.photo_idle}`}
+                  style={{ '--delay': '0ms' }}
                 >
                   <div className={`${styles.photo} ${isRevealed ? styles.photoRevealed : styles.photoLocked}`}>
                     <img
@@ -119,6 +119,7 @@ export default function Slide03Quem({ revealedUpTo = -1, onReveal }) {
                       alt={e.title}
                       className={styles.photoImg}
                       loading="lazy"
+                      style={i === 3 ? { objectPosition: 'right center', transform: 'scale(1.35)', transformOrigin: 'right center' } : undefined}
                     />
                   </div>
                 </div>
@@ -156,8 +157,8 @@ export default function Slide03Quem({ revealedUpTo = -1, onReveal }) {
             {events.map((e, i) => (
               <div
                 key={i}
-                className={`${styles.textCell} ${styles[`text_${phase}`]}`}
-                style={{ '--delay': `${i * 110 + 700}ms` }}
+                className={`${styles.textCell} ${i <= revealedUpTo ? styles.text_in : styles.text_idle}`}
+                style={{ '--delay': '80ms' }}
               >
                 <span className={styles.period}>{e.period}</span>
                 <p className={styles.eventTitle}>{e.title}</p>

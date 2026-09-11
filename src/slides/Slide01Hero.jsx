@@ -6,7 +6,7 @@ export default function Slide01Hero() {
 
       {/* ── Vídeo de fundo em loop ── */}
       <video
-        src="/images/Hair_follicle_grows_upward_202609091156.mp4"
+        src="/images/Slide_01/hf_20260911_024817_5d35dced-89c6-4382-8c09-329b243701ab.mp4"
         className={styles.bg}
         autoPlay
         muted
@@ -24,7 +24,7 @@ export default function Slide01Hero() {
         <div className={styles.footerLeft}>
           <p className={styles.desc}>
             O método prático para médicos que querem<br />
-            dominar o transplante capilar com excelência.
+            <strong style={{ color: 'var(--accent)', fontWeight: 700, fontStyle: 'italic' }}>dominar o transplante capilar com excelência.</strong>
           </p>
         </div>
 

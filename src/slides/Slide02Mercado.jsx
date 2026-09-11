@@ -50,28 +50,26 @@ const cards = [
   },
 ]
 
-export default function Slide02Mercado() {
+export const SLIDE02_STEPS = cards.length
+
+export default function Slide02Mercado({ revealedUpTo = -1 }) {
   const sectionRef = useRef(null)
   const hasVisited = useRef(false)
   const [phase, setPhase] = useState('idle') // 'idle' | 'in' | 'out'
-  // Trava em true assim que o usuário entra no slide — os big numbers só
-  // disparam a contagem a partir daqui, e nunca mais resetam.
-  const [entered, setEntered] = useState(false)
 
   useEffect(() => {
     const el = sectionRef.current
     if (!el) return
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.intersectionRatio >= 0.45) {
           hasVisited.current = true
           setPhase('in')
-          setEntered(true)
-        } else if (hasVisited.current) {
+        } else if (entry.intersectionRatio < 0.05 && hasVisited.current) {
           setPhase('out')
         }
       },
-      { threshold: 0.45 }
+      { threshold: [0, 0.05, 0.45, 1] }
     )
     io.observe(el)
     return () => io.disconnect()
@@ -118,27 +116,30 @@ export default function Slide02Mercado() {
         </div>
 
         <div className={styles.cards}>
-          {cards.map((card, i) => (
-            <div
-              key={i}
-              className={`${styles.card} ${styles[`card_${phase}`]}`}
-              style={{ '--delay': `${i * 120 + 180}ms` }}
-            >
-              <div className={styles.cardStat}>
-                <CountUp
-                  prefix={card.prefix}
-                  target={card.number}
-                  suffix={card.suffix}
-                  duration={1600}
-                  active={entered}
-                />
+          {cards.map((card, i) => {
+            const revealed = revealedUpTo >= i
+            return (
+              <div
+                key={i}
+                className={`${styles.card} ${revealed ? styles.card_in : styles.card_idle}`}
+                style={{ '--delay': '0ms' }}
+              >
+                <div className={styles.cardStat}>
+                  <CountUp
+                    prefix={card.prefix}
+                    target={card.number}
+                    suffix={card.suffix}
+                    duration={1600}
+                    active={revealed}
+                  />
+                </div>
+                <p className={styles.cardStatLabel}>{card.label}</p>
+                <hr className={styles.cardDivider} />
+                <p className={styles.cardQuote}>"{card.quote}"</p>
+                <div className={styles.cardLogo}>{card.logo}</div>
               </div>
-              <p className={styles.cardStatLabel}>{card.label}</p>
-              <hr className={styles.cardDivider} />
-              <p className={styles.cardQuote}>"{card.quote}"</p>
-              <div className={styles.cardLogo}>{card.logo}</div>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
       </div>

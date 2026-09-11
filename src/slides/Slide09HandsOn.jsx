@@ -24,10 +24,11 @@ export default function Slide09HandsOn() {
       </div>
       <div className={styles.inner}>
 
-        <div className={styles.header}>
-          <span className={styles.badge}>PRESENCIAL · PARTE 01</span>
-          <h1 className={styles.title}>Palestras exclusivas com convidados especiais</h1>
-          <h2 className={styles.subtitle}>Vejam alguns palestrantes que já passaram pelo FUE</h2>
+        <div className={styles.card}>
+          <div className={styles.header}>
+            <span className={styles.badge}>PRESENCIAL · PARTE 01</span>
+            <h1 className={styles.title}>Palestras exclusivas com convidados especiais</h1>
+          </div>
         </div>
 
       </div>

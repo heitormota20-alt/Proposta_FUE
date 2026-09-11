@@ -1,7 +1,9 @@
 import styles from './Slide14Bonus.module.css'
 import GradientBlinds from '../components/GradientBlinds'
 
-export default function Slide14Bonus() {
+export const SLIDE14_STEPS = 2
+
+export default function Slide14Bonus({ revealedUpTo = -1 }) {
   return (
     <section className={`slide ${styles.slide}`}>
       <div className={styles.grainientBg}>
@@ -28,8 +30,13 @@ export default function Slide14Bonus() {
           <span className={styles.badge}>Aprenda no seu ritmo, de onde estiver</span>
           <h1 className={styles.title}>Online</h1>
           <p className={styles.sub}>
-            A jornada completa para se tornar o melhor cirurgião em transplante capilar e dominar a arte de construir um negócio e uma clínica de agenda lotada.
+            A metodologia mais completa do mercado de transplante capilar para médicos que querem dominar a parte clínica e de negócios por completo.
           </p>
+        </div>
+
+        <div className={styles.pillsRow}>
+          <span className={`${styles.pill} ${revealedUpTo >= 0 ? styles.pill_in : styles.pill_idle}`}>Master Clinic</span>
+          <span className={`${styles.pill} ${revealedUpTo >= 1 ? styles.pill_in : styles.pill_idle}`} style={{ '--pill-delay': '80ms' }}>Master Business</span>
         </div>
 
       </div>

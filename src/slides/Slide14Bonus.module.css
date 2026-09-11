@@ -47,5 +47,32 @@
 .sub {
   font-family: var(--font-body); font-size: clamp(1rem, 1.3vw, 1.25rem);
   color: var(--text-secondary); line-height: 1.5;
-  max-width: 56ch;
+  max-width: 56ch; text-wrap: pretty;
+}
+
+/* ── Dois badges lado a lado com reveal progressivo ── */
+.pillsRow {
+  display: flex; gap: var(--space-4); margin-top: var(--space-3);
+}
+
+.pill {
+  font-family: var(--font-mono); font-size: clamp(0.875rem, 1.1vw, 1.0625rem);
+  font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent); border-radius: 4px;
+  padding: 0.4em 0.9em; width: fit-content;
+}
+
+.pill_idle {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.pill_in {
+  animation: pillReveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--pill-delay, 0ms) both;
+}
+
+@keyframes pillReveal {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
