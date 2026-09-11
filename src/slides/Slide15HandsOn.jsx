@@ -35,7 +35,7 @@ export default function Slide15HandsOn({ galleryIndex = 0, onGalleryIndexChange 
       <div className={styles.inner}>
 
         <div className={styles.header}>
-          <span className={styles.badge}>PRESENCIAL · PARTE 03</span>
+          <span className={styles.badge}>PRESENCIAL · PARTE 03 (DOMINGO)</span>
           <h1 className={styles.title}>Hands-On com Cirurgia <em className={styles.accent}>No Shave</em></h1>
         </div>
 

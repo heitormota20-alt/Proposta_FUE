@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import styles from './Slide03Quem.module.css'
 import GradientOrb from '../components/GradientOrb'
-import Grainient from '../components/Grainient'
+import GradientBlinds from '../components/GradientBlinds'
 
 const events = [
   {
@@ -70,18 +70,21 @@ export default function Slide03Quem({ revealedUpTo = -1, onReveal }) {
   return (
     <section ref={sectionRef} className={`slide ${styles.slide}`}>
       <div className={styles.grainientBg}>
-        <Grainient
-          color1="#15bc85"
-          color2="#000000"
-          color3="#79e8c3"
-          timeSpeed={0.25}
-          warpStrength={1.0}
-          warpFrequency={5.0}
-          warpSpeed={2.0}
-          warpAmplitude={50.0}
-          contrast={1.5}
-          grainAmount={0.1}
-          zoom={0.9}
+        <GradientBlinds
+          gradientColors={['#10B981', '#10B981']}
+          color1="#10B981"
+          color2="#10B981"
+          angle={0}
+          noise={0.3}
+          blindCount={28}
+          blindMinWidth={22}
+          spotlightRadius={0.35}
+          spotlightSoftness={1}
+          spotlightOpacity={1}
+          mouseDampening={0.15}
+          distortAmount={0}
+          shineDirection="left"
+          mixBlendMode="lighten"
         />
       </div>
       <GradientOrb variant="teal" size={700} top="-25%" left="-10%" opacity={0.15} />

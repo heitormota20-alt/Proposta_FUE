@@ -1,5 +1,4 @@
-/* Mesmo esquema do slide anterior (Bônus 01 — Concierge Pessoal): fundo
-   off-white com o efeito de blinds passando num tom de verde escuro. */
+/* Mesma pegada do slide 27 — teste com fundo off-white. */
 .slide { --accent: #15bc85; background: #f5f2e8; overflow: hidden; }
 
 .grainientBg {
@@ -14,7 +13,7 @@
   display: flex; flex-direction: column;
   justify-content: center; align-items: center;
   text-align: center; height: 100%;
-  gap: var(--space-4); max-width: 960px; margin: 0 auto;
+  gap: var(--space-4); max-width: 920px; margin: 0 auto;
 }
 
 .badge {
@@ -27,18 +26,21 @@
 
 .title {
   font-family: var(--font-display); font-weight: 700;
-  font-size: clamp(2rem, 3.8vw, 4rem);
-  color: var(--mint-950); line-height: 1.1;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  color: var(--mint-950); line-height: 1.05;
   text-transform: none; letter-spacing: -0.02em;
 }
 
 .titleAccent { font-style: italic; font-weight: 300; color: var(--accent); }
 
 .sub {
-  font-family: var(--font-body); font-size: clamp(0.95rem, 1.15vw, 1.0625rem);
-  color: rgba(12, 27, 22, 0.75); line-height: 1.5;
-  max-width: 60ch; margin-bottom: var(--space-3);
+  font-family: var(--font-body); font-size: clamp(1rem, 1.25vw, 1.2rem);
+  color: rgba(12, 27, 22, 0.75); line-height: 1.6;
+  max-width: 62ch; text-wrap: pretty;
+  margin-bottom: var(--space-3);
 }
+
+.sub em { font-style: italic; font-weight: 300; color: var(--accent); }
 
 .grid {
   display: grid;
@@ -79,10 +81,11 @@
 
 .itemText {
   font-family: var(--font-body); font-weight: 500;
-  font-size: clamp(0.85rem, 1vw, 0.9375rem);
+  font-size: clamp(0.9rem, 1.05vw, 1rem);
   color: var(--mint-950); line-height: 1.45;
-  text-wrap: pretty;
 }
+
+.itemText em { font-style: italic; font-weight: 300; color: var(--accent); }
 
 /* ── Reveal um a um ── */
 .item_idle {

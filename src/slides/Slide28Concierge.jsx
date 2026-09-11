@@ -1,37 +1,29 @@
-import { Magnet, Rocket, ShieldAlert, Award, Sparkles, Banknote } from 'lucide-react'
-import styles from './Slide16BonusAcelerador.module.css'
+import { Calendar, Luggage, TrendingUp, LifeBuoy } from 'lucide-react'
+import styles from './Slide28Concierge.module.css'
 import GradientBlinds from '../components/GradientBlinds'
 
 const bullets = [
   {
-    Icon: Magnet,
-    text: <>Como atrair pacientes que pagam caro e que voltam sempre sem gastar fortunas com&nbsp;anúncios</>,
+    Icon: Calendar,
+    text: <>Gestão de datas e <em>encontros pessoais</em>;</>,
   },
   {
-    Icon: Rocket,
-    text: <>Método para faturar em meses o que muitos não faturam em&nbsp;anos</>,
+    Icon: Luggage,
+    text: <>Auxílio com <em>translados</em>, <em>hospedagem</em> <em>e estadia</em> do mentorado;</>,
   },
   {
-    Icon: ShieldAlert,
-    text: <>Erros mais comuns que travam a carreira de médicos de TC — e como&nbsp;evitá-los</>,
+    Icon: TrendingUp,
+    text: <>Acompanhamento de <em>resultados</em>;</>,
   },
   {
-    Icon: Award,
-    text: <>Estratégias comprovadas para se tornar referência em TC na sua&nbsp;região</>,
-  },
-  {
-    Icon: Sparkles,
-    text: <>Técnicas exclusivas de FUE que farão os pacientes desejar o seu&nbsp;serviço</>,
-  },
-  {
-    Icon: Banknote,
-    text: <>O segredo para elevar em até 3x o ticket médio do seu&nbsp;paciente</>,
+    Icon: LifeBuoy,
+    text: <>Suporte por <em>dúvidas</em> <em>e dificuldades</em>.</>,
   },
 ]
 
-export const SLIDE16_STEPS = bullets.length
+export const SLIDE28_STEPS = bullets.length
 
-export default function Slide16BonusAcelerador({ revealedUpTo = -1 }) {
+export default function Slide28Concierge({ revealedUpTo = -1 }) {
   return (
     <section className={`slide ${styles.slide}`}>
       <div className={styles.grainientBg}>
@@ -55,11 +47,12 @@ export default function Slide16BonusAcelerador({ revealedUpTo = -1 }) {
       </div>
 
       <div className={styles.inner}>
-        <span className={styles.badge}>Bônus 02</span>
-        <h1 className={styles.title}>
-          Workshop <em className={styles.titleAccent}>acelerador<br />de carreira</em>
-        </h1>
-        <p className={styles.sub}>Os segredos que ninguém te conta para ter mais resultados em menos tempo.</p>
+        <span className={styles.badge}>Bônus 01</span>
+        <h1 className={styles.title}><em className={styles.titleAccent}>Concierge</em> Pessoal</h1>
+        <p className={styles.sub}>
+          Você terá um concierge dedicado a <em>acompanhar</em> seus <em>resultados</em> e te ajudar com{' '}
+          <em>qualquer tipo de dificuldade e dúvidas</em> como:
+        </p>
 
         <div className={styles.grid}>
           {bullets.map(({ Icon, text }, i) => (

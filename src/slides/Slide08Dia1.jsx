@@ -38,7 +38,8 @@ export default function Slide08Dia1({ galleryIndex = 0, onGalleryIndexChange }) 
           <span className={styles.badge}>PRESENCIAL · PARTE 01 (SEXTA-FEIRA)</span>
           <h1 className={styles.title}>
             Um rooftop fechado para{' '}
-            <em className={styles.accent}>1 dia inteiro</em>{' '}
+            <em className={styles.accent}>1 dia inteiro</em>
+            <br />
             de mentorias sobre negócios.
           </h1>
         </div>

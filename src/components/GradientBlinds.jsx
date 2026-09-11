@@ -193,9 +193,69 @@ export default function GradientBlinds({
   const mouseTargetRef = useRef([0, 0])
   const lastTimeRef = useRef(0)
   const firstResizeRef = useRef(true)
+  const propsRef = useRef(null)
+
+  propsRef.current = {
+    dpr,
+    paused,
+    gradientColors,
+    angle,
+    noise,
+    blindCount,
+    blindMinWidth,
+    mirrorGradient,
+    spotlightRadius,
+    spotlightSoftness,
+    spotlightOpacity,
+    distortAmount,
+    shineDirection,
+    lightMode,
+    spotlightOrigin,
+  }
+
+  // Aplica os valores mais recentes das props aos uniforms já existentes,
+  // sem recriar o contexto WebGL.
+  const applyUniforms = (uniforms) => {
+    const p = propsRef.current
+    const { arr: colorArr, count: colorCount } = prepStops(p.gradientColors)
+    uniforms.uAngle.value = (p.angle * Math.PI) / 180
+    uniforms.uNoise.value = p.noise
+    uniforms.uSpotlightRadius.value = p.spotlightRadius
+    uniforms.uSpotlightSoftness.value = p.spotlightSoftness
+    uniforms.uSpotlightOpacity.value = p.spotlightOpacity
+    uniforms.uMirror.value = p.mirrorGradient ? 1 : 0
+    uniforms.uDistort.value = p.distortAmount
+    uniforms.uShineFlip.value = p.shineDirection === 'right' ? 1 : 0
+    uniforms.uColor0.value = colorArr[0]
+    uniforms.uColor1.value = colorArr[1]
+    uniforms.uColor2.value = colorArr[2]
+    uniforms.uColor3.value = colorArr[3]
+    uniforms.uColor4.value = colorArr[4]
+    uniforms.uColor5.value = colorArr[5]
+    uniforms.uColor6.value = colorArr[6]
+    uniforms.uColor7.value = colorArr[7]
+    uniforms.uColorCount.value = colorCount
+    uniforms.uLightMode.value = p.lightMode ? 1 : 0
+  }
+
+  // Recalcula a contagem de "blinds" a partir do tamanho atual do container
+  // e das props mais recentes (blindCount / blindMinWidth).
+  const updateBlindCount = (uniforms, rectWidth) => {
+    const p = propsRef.current
+    if (p.blindMinWidth && p.blindMinWidth > 0) {
+      const maxByMinWidth = Math.max(1, Math.floor(rectWidth / p.blindMinWidth))
+      const effective = p.blindCount ? Math.min(p.blindCount, maxByMinWidth) : maxByMinWidth
+      uniforms.uBlindCount.value = Math.max(1, effective)
+    } else {
+      uniforms.uBlindCount.value = Math.max(1, p.blindCount)
+    }
+  }
 
   // Cria/destrói o contexto WebGL sob demanda (só existe perto da tela) para
   // não estourar o limite de contextos WebGL simultâneos com muitos slides.
+  // Roda uma única vez: mudanças de props depois disso só atualizam os
+  // uniforms (ver efeito abaixo), sem recriar o canvas — evitar isso é o que
+  // faz a animação não "piscar"/reiniciar a cada navegação de slide.
   useEffect(() => {
     const container = containerRef.current
     if (!container) return
@@ -206,8 +266,9 @@ export default function GradientBlinds({
     const mount = () => {
       if (ctxRef.current) return
 
+      const p = propsRef.current
       const renderer = new Renderer({
-        dpr: dpr ?? (typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1),
+        dpr: p.dpr ?? (typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1),
         alpha: true,
         antialias: true,
       })
@@ -219,31 +280,31 @@ export default function GradientBlinds({
       canvas.style.display = 'block'
       container.appendChild(canvas)
 
-      const { arr: colorArr, count: colorCount } = prepStops(gradientColors)
       const uniforms = {
         iResolution: { value: [gl.drawingBufferWidth, gl.drawingBufferHeight, 1] },
         iMouse: { value: [0, 0] },
         iTime: { value: 0 },
-        uAngle: { value: (angle * Math.PI) / 180 },
-        uNoise: { value: noise },
-        uBlindCount: { value: Math.max(1, blindCount) },
-        uSpotlightRadius: { value: spotlightRadius },
-        uSpotlightSoftness: { value: spotlightSoftness },
-        uSpotlightOpacity: { value: spotlightOpacity },
-        uMirror: { value: mirrorGradient ? 1 : 0 },
-        uDistort: { value: distortAmount },
-        uShineFlip: { value: shineDirection === 'right' ? 1 : 0 },
-        uColor0: { value: colorArr[0] },
-        uColor1: { value: colorArr[1] },
-        uColor2: { value: colorArr[2] },
-        uColor3: { value: colorArr[3] },
-        uColor4: { value: colorArr[4] },
-        uColor5: { value: colorArr[5] },
-        uColor6: { value: colorArr[6] },
-        uColor7: { value: colorArr[7] },
-        uColorCount: { value: colorCount },
-        uLightMode: { value: lightMode ? 1 : 0 },
+        uAngle: { value: 0 },
+        uNoise: { value: 0 },
+        uBlindCount: { value: 1 },
+        uSpotlightRadius: { value: 0.5 },
+        uSpotlightSoftness: { value: 1 },
+        uSpotlightOpacity: { value: 1 },
+        uMirror: { value: 0 },
+        uDistort: { value: 0 },
+        uShineFlip: { value: 0 },
+        uColor0: { value: [1, 1, 1] },
+        uColor1: { value: [1, 1, 1] },
+        uColor2: { value: [1, 1, 1] },
+        uColor3: { value: [1, 1, 1] },
+        uColor4: { value: [1, 1, 1] },
+        uColor5: { value: [1, 1, 1] },
+        uColor6: { value: [1, 1, 1] },
+        uColor7: { value: [1, 1, 1] },
+        uColorCount: { value: 2 },
+        uLightMode: { value: 0 },
       }
+      applyUniforms(uniforms)
 
       const program = new Program(gl, { vertex, fragment, uniforms })
       const geometry = new Triangle(gl)
@@ -254,18 +315,13 @@ export default function GradientBlinds({
         renderer.setSize(rect.width, rect.height)
         uniforms.iResolution.value = [gl.drawingBufferWidth, gl.drawingBufferHeight, 1]
 
-        if (blindMinWidth && blindMinWidth > 0) {
-          const maxByMinWidth = Math.max(1, Math.floor(rect.width / blindMinWidth))
-          const effective = blindCount ? Math.min(blindCount, maxByMinWidth) : maxByMinWidth
-          uniforms.uBlindCount.value = Math.max(1, effective)
-        } else {
-          uniforms.uBlindCount.value = Math.max(1, blindCount)
-        }
+        updateBlindCount(uniforms, rect.width)
 
         if (firstResizeRef.current) {
           firstResizeRef.current = false
-          const cx = gl.drawingBufferWidth * spotlightOrigin[0]
-          const cy = gl.drawingBufferHeight * spotlightOrigin[1]
+          const origin = propsRef.current.spotlightOrigin
+          const cx = gl.drawingBufferWidth * origin[0]
+          const cy = gl.drawingBufferHeight * origin[1]
           uniforms.iMouse.value = [cx, cy]
           mouseTargetRef.current = [cx, cy]
         }
@@ -287,7 +343,7 @@ export default function GradientBlinds({
           gl.drawingBufferHeight * (0.18 + f * 0.64),
         ]
 
-        if (!paused) {
+        if (!propsRef.current.paused) {
           try {
             renderer.render({ scene: mesh })
           } catch (e) {
@@ -338,7 +394,7 @@ export default function GradientBlinds({
             ctx.gl.drawingBufferWidth  * (0.18 + f * 0.64),
             ctx.gl.drawingBufferHeight * (0.18 + f * 0.64),
           ]
-          if (!paused) {
+          if (!propsRef.current.paused) {
             try {
               ctx.renderer.render({ scene: ctx.mesh })
             } catch (e) {
@@ -359,22 +415,18 @@ export default function GradientBlinds({
       document.removeEventListener('visibilitychange', onVisibility)
       unmount()
     }
-  }, [
-    dpr,
-    paused,
-    gradientColors,
-    angle,
-    noise,
-    blindCount,
-    blindMinWidth,
-    mirrorGradient,
-    spotlightRadius,
-    spotlightSoftness,
-    spotlightOpacity,
-    distortAmount,
-    shineDirection,
-    lightMode,
-  ])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // Repassa mudanças de props para os uniforms já montados, sem recriar o
+  // contexto WebGL (isso é o que evita o flicker ao navegar entre slides).
+  useEffect(() => {
+    const ctx = ctxRef.current
+    if (!ctx || !containerRef.current) return
+    applyUniforms(ctx.program.uniforms)
+    const rect = containerRef.current.getBoundingClientRect()
+    updateBlindCount(ctx.program.uniforms, rect.width)
+  })
 
   return (
     <div

@@ -24,15 +24,23 @@ import Slide12Mentorias, { SLIDE12_STEPS } from './slides/Slide12Mentorias'
 import Slide13Estrutura, { SLIDE13_STEPS } from './slides/Slide13Estrutura'
 import Slide14Bonus, { SLIDE14_STEPS } from './slides/Slide14Bonus'
 import Slide15BonusConcierge, { SLIDE_CONCIERGE_STEPS } from './slides/Slide15BonusConcierge'
-import Slide16BonusAcelerador from './slides/Slide16BonusAcelerador'
-import Slide17BonusWorkshop from './slides/Slide17BonusWorkshop'
+import Slide16BonusAcelerador, { SLIDE16_STEPS } from './slides/Slide16BonusAcelerador'
+import Slide17BonusWorkshop, { SLIDE17_STEPS } from './slides/Slide17BonusWorkshop'
 import Slide18Recap from './slides/Slide18Recap'
-import SlideQuantoPagaria from './slides/Slide_QuantoPagaria'
+import Slide32Entregaveis, { SLIDE32_STEPS } from './slides/Slide32Entregaveis'
+import SlideQuantoPagaria, { SLIDE_QUANTOPAGARIA_STEPS } from './slides/Slide_QuantoPagaria'
 import Slide19Entregaveis from './slides/Slide19Entregaveis'
 import SlideDepoimentos from './slides/Slide_Depoimentos'
 import SlideMasNaoPaga from './slides/Slide_MasNaoPaga'
 import Slide20Preco from './slides/Slide20Preco'
 import Slide21Pagamento from './slides/Slide21Pagamento'
+import Slide22UltramarBusiness from './slides/Slide22UltramarBusiness'
+import Slide23UltramarClinic from './slides/Slide23UltramarClinic'
+import Slide24Mentoria from './slides/Slide24Mentoria'
+import Slide25MentoriaAoVivo from './slides/Slide25MentoriaAoVivo'
+import Slide26Estrutura, { SLIDE26_STEPS } from './slides/Slide26Estrutura'
+import Slide27NaoAcaba, { SLIDE27_STEPS } from './slides/Slide27NaoAcaba'
+import Slide28Concierge, { SLIDE28_STEPS } from './slides/Slide28Concierge'
 
 const SLIDES = [
   Slide01Hero,           // 01 · Hero — vídeo + tagline
@@ -56,9 +64,17 @@ const SLIDES = [
   Slide13Estrutura,      // 18 · Fellowship — o acesso presencial que nenhum concorrente tem
   Slide14Bonus,          // 19 · Online — plataforma, jornada completa
   Slide15BonusConcierge, // 20 · Online — plataforma, conteúdos, mockups
-  Slide16BonusAcelerador,// 21 · Bônus 02 — Workshop Acelerador de Carreira
+  Slide22UltramarBusiness, // 21 · Master Business — Ultramar Business, visão de negócios do Dr. Rafael
+  Slide23UltramarClinic, // 22 · Master Clinic — Ultramar Clinic, metodologia de aceleração clínica
+  Slide24Mentoria,       // 23 · Mentoria — encontros ao vivo no Zoom
+  Slide25MentoriaAoVivo, // 24 · Mentorias ao vivo durante 4 meses
+  Slide26Estrutura,      // 25 · Estrutura da formação — 4 bullets com ícone
+  Slide27NaoAcaba,       // 26 · "Mas não acaba aqui" — teaser dos bônus
+  Slide28Concierge,      // 27 · Bônus 01 — Concierge Pessoal
+  Slide16BonusAcelerador,// 28 · Bônus 02 — Workshop Acelerador de Carreira
   Slide17BonusWorkshop,  // 22 · Bônus 03 — Workshop Mão na Massa
   Slide18Recap,          // 23 · Recap — "O que torna o FUE Ultramar único?"
+  Slide32Entregaveis,    // 24 · Recap — entregáveis em quadrados com ícone
   SlideQuantoPagaria,    // 24 · "Quanto você pagaria?" — teaser de preço
   Slide19Entregaveis,    // 25 · Entregáveis com valores — total R$173.000
   SlideDepoimentos,      // 26 · Depoimentos — o que os alunos dizem
@@ -73,6 +89,13 @@ const SLIDE03_INDEX = SLIDES.indexOf(Slide03Quem)
 const SLIDE06_INDEX = SLIDES.indexOf(Slide06Programa)
 const SLIDE14_INDEX = SLIDES.indexOf(Slide14Bonus)
 const SLIDE_CONCIERGE_INDEX = SLIDES.indexOf(Slide15BonusConcierge)
+const SLIDE26_INDEX = SLIDES.indexOf(Slide26Estrutura)
+const SLIDE27_INDEX = SLIDES.indexOf(Slide27NaoAcaba)
+const SLIDE28_INDEX = SLIDES.indexOf(Slide28Concierge)
+const SLIDE16_INDEX = SLIDES.indexOf(Slide16BonusAcelerador)
+const SLIDE17_INDEX = SLIDES.indexOf(Slide17BonusWorkshop)
+const SLIDE32_INDEX = SLIDES.indexOf(Slide32Entregaveis)
+const SLIDE_QUANTOPAGARIA_INDEX = SLIDES.indexOf(SlideQuantoPagaria)
 
 // Slides com carrossel sanfona (AccordionGallery) — a seta de avançar,
 // enquanto o usuário estiver neles, primeiro expande cada card da galeria
@@ -94,6 +117,13 @@ export default function App() {
   const [slide06Revealed, setSlide06Revealed] = useState(-1)
   const [slide14Revealed, setSlide14Revealed] = useState(-1)
   const [slideConciergeRevealed, setSlideConciergeRevealed] = useState(-1)
+  const [slide26Revealed, setSlide26Revealed] = useState(-1)
+  const [slide27Revealed, setSlide27Revealed] = useState(-1)
+  const [slide28Revealed, setSlide28Revealed] = useState(-1)
+  const [slide16Revealed, setSlide16Revealed] = useState(-1)
+  const [slide17Revealed, setSlide17Revealed] = useState(-1)
+  const [slide32Revealed, setSlide32Revealed] = useState(-1)
+  const [slideQuantoPagariaRevealed, setSlideQuantoPagariaRevealed] = useState(-1)
   const [galleryIndices, setGalleryIndices] = useState({})
 
   const handleSlideChange = useCallback((index) => {
@@ -129,6 +159,90 @@ export default function App() {
       }
       if (direction === -1 && slideConciergeRevealed >= 0) {
         setSlideConciergeRevealed((prev) => prev - 1)
+        return
+      }
+    }
+
+    // Slide26: avançar revela bullets um a um (esquerda→direita); recuar oculta um a um.
+    if (currentSlide === SLIDE26_INDEX) {
+      if (direction === 1 && slide26Revealed < SLIDE26_STEPS - 1) {
+        setSlide26Revealed((prev) => Math.min(prev + 1, SLIDE26_STEPS - 1))
+        return
+      }
+      if (direction === -1 && slide26Revealed >= 0) {
+        setSlide26Revealed((prev) => prev - 1)
+        return
+      }
+    }
+
+    // Slide27: avançar revela palavras uma a uma; recuar oculta uma a uma.
+    if (currentSlide === SLIDE27_INDEX) {
+      if (direction === 1 && slide27Revealed < SLIDE27_STEPS - 1) {
+        setSlide27Revealed((prev) => Math.min(prev + 1, SLIDE27_STEPS - 1))
+        return
+      }
+      if (direction === -1 && slide27Revealed >= 0) {
+        setSlide27Revealed((prev) => prev - 1)
+        return
+      }
+    }
+
+    // Slide28: avançar revela bullets um a um; recuar oculta um a um.
+    if (currentSlide === SLIDE28_INDEX) {
+      if (direction === 1 && slide28Revealed < SLIDE28_STEPS - 1) {
+        setSlide28Revealed((prev) => Math.min(prev + 1, SLIDE28_STEPS - 1))
+        return
+      }
+      if (direction === -1 && slide28Revealed >= 0) {
+        setSlide28Revealed((prev) => prev - 1)
+        return
+      }
+    }
+
+    // Slide16 (Bônus 02): avançar revela bullets um a um; recuar oculta um a um.
+    if (currentSlide === SLIDE16_INDEX) {
+      if (direction === 1 && slide16Revealed < SLIDE16_STEPS - 1) {
+        setSlide16Revealed((prev) => Math.min(prev + 1, SLIDE16_STEPS - 1))
+        return
+      }
+      if (direction === -1 && slide16Revealed >= 0) {
+        setSlide16Revealed((prev) => prev - 1)
+        return
+      }
+    }
+
+    // Slide17 (Bônus 03): avançar revela bullets um a um; recuar oculta um a um.
+    if (currentSlide === SLIDE17_INDEX) {
+      if (direction === 1 && slide17Revealed < SLIDE17_STEPS - 1) {
+        setSlide17Revealed((prev) => Math.min(prev + 1, SLIDE17_STEPS - 1))
+        return
+      }
+      if (direction === -1 && slide17Revealed >= 0) {
+        setSlide17Revealed((prev) => prev - 1)
+        return
+      }
+    }
+
+    // Slide32 (Entregáveis): avançar revela quadrados um a um; recuar oculta um a um.
+    if (currentSlide === SLIDE32_INDEX) {
+      if (direction === 1 && slide32Revealed < SLIDE32_STEPS - 1) {
+        setSlide32Revealed((prev) => Math.min(prev + 1, SLIDE32_STEPS - 1))
+        return
+      }
+      if (direction === -1 && slide32Revealed >= 0) {
+        setSlide32Revealed((prev) => prev - 1)
+        return
+      }
+    }
+
+    // SlideQuantoPagaria: avançar revela os textos um a um; recuar oculta um a um.
+    if (currentSlide === SLIDE_QUANTOPAGARIA_INDEX) {
+      if (direction === 1 && slideQuantoPagariaRevealed < SLIDE_QUANTOPAGARIA_STEPS - 1) {
+        setSlideQuantoPagariaRevealed((prev) => Math.min(prev + 1, SLIDE_QUANTOPAGARIA_STEPS - 1))
+        return
+      }
+      if (direction === -1 && slideQuantoPagariaRevealed >= 0) {
+        setSlideQuantoPagariaRevealed((prev) => prev - 1)
         return
       }
     }
@@ -210,6 +324,20 @@ export default function App() {
               ? { revealedUpTo: slide14Revealed }
               : index === SLIDE_CONCIERGE_INDEX
               ? { revealedUpTo: slideConciergeRevealed }
+              : index === SLIDE26_INDEX
+              ? { revealedUpTo: slide26Revealed }
+              : index === SLIDE27_INDEX
+              ? { revealedUpTo: slide27Revealed }
+              : index === SLIDE28_INDEX
+              ? { revealedUpTo: slide28Revealed }
+              : index === SLIDE16_INDEX
+              ? { revealedUpTo: slide16Revealed }
+              : index === SLIDE17_INDEX
+              ? { revealedUpTo: slide17Revealed }
+              : index === SLIDE32_INDEX
+              ? { revealedUpTo: slide32Revealed }
+              : index === SLIDE_QUANTOPAGARIA_INDEX
+              ? { revealedUpTo: slideQuantoPagariaRevealed }
               : galleryConfig
               ? {
                   galleryIndex: galleryIndices[index] ?? 0,

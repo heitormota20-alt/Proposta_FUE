@@ -7,10 +7,16 @@ export default function SlideUltClinic() {
       <GradientOrb variant="teal" size={700} top="0%" left="-15%" opacity={0.18} />
 
       <div className={styles.inner}>
-        {/* ── Espaço reservado para o vídeo (a enviar) ── */}
         <div className={styles.left}>
           <div className={styles.videoSlot}>
-            <span className={styles.videoLabel}>VÍDEO</span>
+            <video
+              src="/images/Video_Slide_16.mp4"
+              className={styles.video}
+              controls
+              loop
+              playsInline
+              preload="auto"
+            />
           </div>
         </div>
 

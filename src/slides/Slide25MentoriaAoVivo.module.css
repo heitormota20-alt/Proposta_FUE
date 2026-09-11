@@ -1,0 +1,73 @@
+.slide { --accent: #15bc85; background: var(--surface-0); overflow: hidden; }
+
+.grainientBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.22;
+}
+
+.inner {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1.2fr 1fr; grid-template-rows: 1fr;
+  gap: var(--space-9); height: 100%; align-items: center;
+}
+
+.left {
+  display: flex; flex-direction: column; gap: var(--space-4);
+  min-height: 0; min-width: 0;
+}
+
+.badge {
+  font-family: var(--font-mono); font-size: 0.6875rem;
+  letter-spacing: 0.2em; color: var(--accent);
+  border: 1px solid var(--accent); border-radius: 4px;
+  padding: var(--space-1) var(--space-3); width: fit-content;
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(2.25rem, 3.8vw, 4rem);
+  color: var(--white); line-height: 1.15;
+  text-transform: none; letter-spacing: -0.02em;
+}
+
+.accent { font-style: italic; font-weight: 300; color: var(--accent); }
+
+.lead {
+  font-family: var(--font-body); font-size: clamp(1.1rem, 1.5vw, 1.375rem);
+  color: var(--white); opacity: 0.9; line-height: 1.55;
+  max-width: 52ch;
+}
+
+.sub {
+  font-family: var(--font-body); font-size: clamp(0.95rem, 1.15vw, 1.0625rem);
+  color: var(--text-secondary); line-height: 1.6;
+  max-width: 54ch;
+}
+
+.highlight { color: var(--accent); font-weight: 700; }
+
+/* ── Lado direito — placeholder de imagens (a enviar) ── */
+.right { display: flex; align-items: center; justify-content: center; height: 100%; min-height: 0; min-width: 0; }
+
+.imageSlot {
+  width: 100%; height: 100%; max-height: 100%;
+  aspect-ratio: 3 / 4;
+  border: 1px solid rgba(21, 188, 133, 0.3);
+  border-radius: 16px;
+  background: rgba(21, 188, 133, 0.04);
+  box-shadow: 0 0 40px rgba(21, 188, 133, 0.1);
+  display: flex; align-items: center; justify-content: center;
+}
+
+.imageLabel {
+  font-family: var(--font-mono); font-size: 0.6875rem;
+  letter-spacing: 0.3em; color: rgba(21, 188, 133, 0.35);
+}
+
+@media (max-width: 768px) {
+  .inner { grid-template-columns: 1fr; }
+  .right { display: none; }
+}

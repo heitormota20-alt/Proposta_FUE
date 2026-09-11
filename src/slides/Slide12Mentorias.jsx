@@ -3,9 +3,9 @@ import AccordionGallery from '../components/AccordionGallery'
 import GradientBlinds from '../components/GradientBlinds'
 
 const galleryItems = [
-  { image: '/images/Slide_16/IMG_01.JPG', label: '6 Fellows durante a sua jornada conosco' },
-  { image: '/images/Slide_16/IMG_02.jpg', label: 'O seu fellow acontecerá em dupla, prezando pela proximidade e exclusividade do programa' },
-  { image: '/images/Slide_16/IMG_03.jpg', label: 'Acompanhamento de casos, vivência clínica e muito mais' },
+  { image: '/images/Slide_16/IMG_01.JPG', label: '6 Fellows durante a sua jornada conosco.' },
+  { image: '/images/Slide_16/IMG_02.jpg', label: 'O seu fellow acontecerá em dupla, prezando pela proximidade e exclusividade do programa.' },
+  { image: '/images/Slide_16/IMG_03.jpg', label: 'Acompanhamento de casos, vivência clínica e muito mais.' },
 ]
 
 export const SLIDE12_STEPS = galleryItems.length

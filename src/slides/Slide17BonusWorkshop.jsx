@@ -1,38 +1,87 @@
+import { FileText, Megaphone, Target } from 'lucide-react'
 import styles from './Slide17BonusWorkshop.module.css'
-import GradientOrb from '../components/GradientOrb'
+import GradientBlinds from '../components/GradientBlinds'
 
-export default function Slide17BonusWorkshop() {
-  const items = [
-    'Acesso a uma biblioteca de roteiros de anúncios já validados para você replicar',
-    'Na prática, especialistas em marketing avaliarão seus anúncios gravados',
-    'Especialistas em tráfego pago ajudarão você passo a passo a subir campanhas assertivas',
-    'Estratégias já validadas para aplicar no seu marketing sem precisar de seguidores ou equipe',
-  ]
+const bullets = [
+  {
+    Icon: FileText,
+    text: (
+      <>
+        Acesso a uma biblioteca de roteiros de anúncios já validados para você{' '}
+        <em>replicar</em> e conseguir ter clientes{' '}
+        <em>desejando fazer transplante com você</em>;
+      </>
+    ),
+  },
+  {
+    Icon: Megaphone,
+    text: (
+      <>
+        Na prática, os nossos especialistas em <em>marketing</em> avaliarão os seus
+        anúncios gravados para você sair do Workshop com eles <em>prontos</em>;
+      </>
+    ),
+  },
+  {
+    Icon: Target,
+    text: (
+      <>
+        Na prática, nossos especialistas em <em>tráfego pago</em> ajudarão você no{' '}
+        <em>passo a passo</em> para que você aprenda e domine a arte de subir
+        campanhas assertivas que geram <em>faturamento</em>.
+      </>
+    ),
+  },
+]
 
+export const SLIDE17_STEPS = bullets.length
+
+export default function Slide17BonusWorkshop({ revealedUpTo = -1 }) {
   return (
     <section className={`slide ${styles.slide}`}>
-      <GradientOrb variant="teal" size={650} top="5%" right="-10%" opacity={0.18} />
+      <div className={styles.grainientBg}>
+        <GradientBlinds
+          lightMode
+          gradientColors={['#0d4a36', '#0d4a36']}
+          color1="#0d4a36"
+          color2="#0d4a36"
+          angle={0}
+          noise={0.2}
+          blindCount={28}
+          blindMinWidth={22}
+          spotlightRadius={0.4}
+          spotlightSoftness={1}
+          spotlightOpacity={1}
+          mouseDampening={0.15}
+          distortAmount={0}
+          shineDirection="left"
+          mixBlendMode="normal"
+        />
+      </div>
 
       <div className={styles.inner}>
-        <div className={styles.header}>
-          <span className={styles.bonusTag}>BÔNUS 03</span>
-          <h2 className={styles.title}>
-            Workshop <em className={styles.accent}>Mão na Massa</em>
-          </h2>
-          <p className={styles.sub}>Oficina de marketing, tráfego e criativos — resultados práticos e imediatos.</p>
-        </div>
+        <span className={styles.badge}>Bônus 03</span>
+        <h1 className={styles.title}>
+          Oficina de <em>marketing</em>,<br /><em>tráfego pago</em> e <em>criativos</em>
+        </h1>
+        <p className={styles.sub}>
+          Tenha acesso a estratégias já validadas para aplicar <em>no seu marketing</em> e ter
+          resultados (sem precisar de seguidores, autoridade ou até mesmo de equipe).
+        </p>
 
-        <ul className={styles.list}>
-          {items.map((item, i) => (
-            <li key={i} className={styles.item}>
-              <span className={styles.arrow}>→</span>
-              <span>{item}</span>
-            </li>
+        <div className={styles.grid}>
+          {bullets.map(({ Icon, text }, i) => (
+            <div
+              key={i}
+              className={`${styles.item} ${i <= revealedUpTo ? styles.item_in : styles.item_idle}`}
+              style={{ '--item-delay': `${i * 60}ms` }}
+            >
+              <div className={styles.iconWrap}>
+                <Icon className={styles.icon} strokeWidth={1.75} />
+              </div>
+              <p className={styles.itemText}>{text}</p>
+            </div>
           ))}
-        </ul>
-
-        <div className={styles.highlight}>
-          Saia do Workshop com seus anúncios <strong>prontos.</strong>
         </div>
       </div>
     </section>
