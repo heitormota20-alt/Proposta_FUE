@@ -15,7 +15,8 @@ export default function SlideMasNaoPaga() {
         <div className={styles.divider} />
 
         <h2 className={styles.statement}>
-          Mas você <em className={styles.accent}>não vai pagar</em> esse valor…
+          Mas você <em className={styles.accent}>não vai</em><br />
+          <em className={styles.accent}>pagar</em> esse valor..
         </h2>
       </div>
     </section>

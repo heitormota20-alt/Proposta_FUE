@@ -1,7 +1,15 @@
 import styles from './Slide19Entregaveis.module.css'
 import GradientOrb from '../components/GradientOrb'
+import GradientBlinds from '../components/GradientBlinds'
 
-export default function Slide19Entregaveis() {
+// Um único passo extra: clicar em avançar, já no fim deste slide, não navega
+// para o próximo — abre um overlay em vidro fosco por cima do próprio slide,
+// desfocando a tabela para dar leitura ao "Valor Oficial".
+export const SLIDE19_STEPS = 1
+
+export default function Slide19Entregaveis({ revealedUpTo = -1 }) {
+  const overlayOpen = revealedUpTo >= 0
+
   const items = [
     { label: 'Treinamento Presencial Hands On', value: 'R$ 38.000' },
     { label: '6 Encontros Presenciais de Fellow', value: 'R$ 90.000' },
@@ -18,15 +26,30 @@ export default function Slide19Entregaveis() {
 
   return (
     <section className={`slide ${styles.slide}`}>
+      <div className={styles.grainientBg}>
+        <GradientBlinds
+          gradientColors={['#10B981', '#10B981']}
+          color1="#10B981"
+          color2="#10B981"
+          angle={0}
+          noise={0.3}
+          blindCount={28}
+          blindMinWidth={22}
+          spotlightRadius={0.35}
+          spotlightSoftness={1}
+          spotlightOpacity={1}
+          mouseDampening={0.15}
+          distortAmount={0}
+          shineDirection="left"
+          mixBlendMode="lighten"
+        />
+      </div>
       <GradientOrb variant="teal" size={600} top="-15%" right="-10%" opacity={0.16} />
 
       <div className={styles.inner}>
         <div className={styles.header}>
-          <span className={styles.eyebrow}>Calculando o valor de cada entregável</span>
-          <h2 className={styles.title}>
-            Tudo isso junto vale{' '}
-            <em className={styles.accent}>mais de R$ 173.000</em>
-          </h2>
+          <h1 className={styles.title}>Recapitulando os entregáveis</h1>
+          <h2 className={styles.subtitle}>E calculando quanto vale cada um individualmente</h2>
         </div>
 
         <div className={styles.table}>
@@ -45,6 +68,27 @@ export default function Slide19Entregaveis() {
             <span className={styles.totalLabel}>Total</span>
             <span className={styles.totalValue}>+ de R$ 173.000</span>
           </div>
+        </div>
+      </div>
+
+      {/* ── Overlay "Valor Oficial" — entra por cima do slide, desfocando a
+          tabela, sem navegar para o próximo slide ── */}
+      <div className={`${styles.overlay} ${overlayOpen ? styles.overlay_in : styles.overlay_idle}`} aria-hidden={!overlayOpen}>
+        <div className={styles.card}>
+          <h1 className={styles.overlayTitle}>
+            Valor <em className={styles.accentItalic}>oficial</em> do acesso ao{' '}
+            <strong className={styles.accentBold}>FUE Ultramar</strong>
+          </h1>
+
+          <div className={styles.priceStack}>
+            <span className={styles.oldPrice}>R$ 173.000,00</span>
+            <div className={styles.newPrice}>
+              <span className={styles.newPriceLabel}>por</span>
+              <span className={styles.newPriceValue}>R$ 105.000,00</span>
+            </div>
+          </div>
+
+          <p className={styles.discount}>desconto de +R$ 68.000,00</p>
         </div>
       </div>
     </section>

@@ -29,7 +29,7 @@ import Slide17BonusWorkshop, { SLIDE17_STEPS } from './slides/Slide17BonusWorksh
 import Slide18Recap from './slides/Slide18Recap'
 import Slide32Entregaveis, { SLIDE32_STEPS } from './slides/Slide32Entregaveis'
 import SlideQuantoPagaria, { SLIDE_QUANTOPAGARIA_STEPS } from './slides/Slide_QuantoPagaria'
-import Slide19Entregaveis from './slides/Slide19Entregaveis'
+import Slide19Entregaveis, { SLIDE19_STEPS } from './slides/Slide19Entregaveis'
 import SlideDepoimentos from './slides/Slide_Depoimentos'
 import SlideMasNaoPaga from './slides/Slide_MasNaoPaga'
 import Slide20Preco from './slides/Slide20Preco'
@@ -76,9 +76,9 @@ const SLIDES = [
   Slide18Recap,          // 23 · Recap — "O que torna o FUE Ultramar único?"
   Slide32Entregaveis,    // 24 · Recap — entregáveis em quadrados com ícone
   SlideQuantoPagaria,    // 24 · "Quanto você pagaria?" — teaser de preço
-  Slide19Entregaveis,    // 25 · Entregáveis com valores — total R$173.000
-  SlideDepoimentos,      // 26 · Depoimentos — o que os alunos dizem
-  SlideMasNaoPaga,       // 27 · "Mas você não vai pagar esse valor…"
+  Slide19Entregaveis,    // 25 · Entregáveis com valores — total R$173.000 (+ overlay "Valor Oficial")
+  SlideMasNaoPaga,       // 26 · "Mas você não vai pagar esse valor…"
+  SlideDepoimentos,      // 27 · Depoimentos — o que os alunos dizem
   Slide20Preco,          // 28 · Preço — R$173k → R$105k → R$85k
   Slide21Pagamento,      // 29 · Formas de pagamento
 ]
@@ -96,6 +96,7 @@ const SLIDE16_INDEX = SLIDES.indexOf(Slide16BonusAcelerador)
 const SLIDE17_INDEX = SLIDES.indexOf(Slide17BonusWorkshop)
 const SLIDE32_INDEX = SLIDES.indexOf(Slide32Entregaveis)
 const SLIDE_QUANTOPAGARIA_INDEX = SLIDES.indexOf(SlideQuantoPagaria)
+const SLIDE19_INDEX = SLIDES.indexOf(Slide19Entregaveis)
 
 // Slides com carrossel sanfona (AccordionGallery) — a seta de avançar,
 // enquanto o usuário estiver neles, primeiro expande cada card da galeria
@@ -124,6 +125,7 @@ export default function App() {
   const [slide17Revealed, setSlide17Revealed] = useState(-1)
   const [slide32Revealed, setSlide32Revealed] = useState(-1)
   const [slideQuantoPagariaRevealed, setSlideQuantoPagariaRevealed] = useState(-1)
+  const [slide19Revealed, setSlide19Revealed] = useState(-1)
   const [galleryIndices, setGalleryIndices] = useState({})
 
   const handleSlideChange = useCallback((index) => {
@@ -247,6 +249,20 @@ export default function App() {
       }
     }
 
+    // Slide19: avançar entra com o overlay "Valor Oficial" por cima do slide
+    // (desfocando o conteúdo), sem navegar para o próximo slide; recuar fecha
+    // o overlay antes de voltar a navegar normalmente.
+    if (currentSlide === SLIDE19_INDEX) {
+      if (direction === 1 && slide19Revealed < SLIDE19_STEPS - 1) {
+        setSlide19Revealed((prev) => Math.min(prev + 1, SLIDE19_STEPS - 1))
+        return
+      }
+      if (direction === -1 && slide19Revealed >= 0) {
+        setSlide19Revealed((prev) => prev - 1)
+        return
+      }
+    }
+
     // Slide14: avançar revela pills um a um; recuar oculta um a um.
     if (currentSlide === SLIDE14_INDEX) {
       if (direction === 1 && slide14Revealed < SLIDE14_STEPS - 1) {
@@ -338,6 +354,8 @@ export default function App() {
               ? { revealedUpTo: slide32Revealed }
               : index === SLIDE_QUANTOPAGARIA_INDEX
               ? { revealedUpTo: slideQuantoPagariaRevealed }
+              : index === SLIDE19_INDEX
+              ? { revealedUpTo: slide19Revealed }
               : galleryConfig
               ? {
                   galleryIndex: galleryIndices[index] ?? 0,
