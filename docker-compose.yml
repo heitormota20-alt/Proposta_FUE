@@ -1,21 +1,27 @@
-services:
-  dev:
-    build:
-      context: .
-      target: dev
-    ports:
-      - "5173:5173"
-    volumes:
-      - .:/app
-      - /app/node_modules
-    environment:
-      - NODE_ENV=development
+version: "3.7"
 
-  prod:
-    build:
-      context: .
-      target: prod
-    ports:
-      - "80:80"
-    profiles:
-      - prod
+services:
+  proposta-fue:
+    image: proposta-fue:latest
+    build: .
+    networks:
+      - UltramarNet
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.proposta-fue.rule=Host(`proposta.rafaelultramar.com.br`)
+        - traefik.http.routers.proposta-fue.entrypoints=websecure
+        - traefik.http.routers.proposta-fue.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.proposta-fue.service=proposta-fue
+        - traefik.http.services.proposta-fue.loadbalancer.server.port=80
+        - traefik.http.services.proposta-fue.loadbalancer.passHostHeader=true
+
+networks:
+  UltramarNet:
+    name: UltramarNet
+    external: true
