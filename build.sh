@@ -1,0 +1,1 @@
+git pull origin main && docker build -t proposta-fue:latest . && docker stack deploy -c docker-compose.yml proposta-fue && docker service update --image proposta-fue:latest --force proposta-fue_proposta-fue
