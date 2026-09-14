@@ -30,7 +30,6 @@ import Slide18Recap from './slides/Slide18Recap'
 import Slide32Entregaveis, { SLIDE32_STEPS } from './slides/Slide32Entregaveis'
 import SlideQuantoPagaria, { SLIDE_QUANTOPAGARIA_STEPS } from './slides/Slide_QuantoPagaria'
 import Slide19Entregaveis, { SLIDE19_STEPS } from './slides/Slide19Entregaveis'
-import SlideDepoimentos from './slides/Slide_Depoimentos'
 import SlideMasNaoPaga from './slides/Slide_MasNaoPaga'
 import Slide20Preco from './slides/Slide20Preco'
 import Slide21Pagamento from './slides/Slide21Pagamento'
@@ -78,7 +77,6 @@ const SLIDES = [
   SlideQuantoPagaria,    // 24 · "Quanto você pagaria?" — teaser de preço
   Slide19Entregaveis,    // 25 · Entregáveis com valores — total R$173.000 (+ overlay "Valor Oficial")
   SlideMasNaoPaga,       // 26 · "Mas você não vai pagar esse valor…"
-  SlideDepoimentos,      // 27 · Depoimentos — o que os alunos dizem
   Slide20Preco,          // 28 · Preço — R$173k → R$105k → R$85k
   Slide21Pagamento,      // 29 · Formas de pagamento
 ]
