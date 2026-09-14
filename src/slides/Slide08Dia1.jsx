@@ -3,9 +3,9 @@ import AccordionGallery from '../components/AccordionGallery'
 import GradientBlinds from '../components/GradientBlinds'
 
 const galleryItems = [
-  { image: '/images/Slide_09/IMG_01.png', label: 'Marketing, Posicionamento e Produção de Conteúdo · Identidade e Branding no Mercado Digital' },
-  { image: '/images/Slide_09/IMG_02.png', label: 'Entrega do Kit de Onboarding Exclusivo' },
-  { image: '/images/Slide_09/IMG_03.jpg', label: 'Networking e Conversas com o Dr. Rafael e os outros alunos · LTV no Mercado de Transplante Capilar' },
+  { image: '/images/Slide_09/IMG_01.webp', label: 'Marketing, Posicionamento e Produção de Conteúdo · Identidade e Branding no Mercado Digital' },
+  { image: '/images/Slide_09/IMG_02.webp', label: 'Entrega do Kit de Onboarding Exclusivo' },
+  { image: '/images/Slide_09/IMG_03.webp', label: 'Networking e Conversas com o Dr. Rafael e os outros alunos · LTV no Mercado de Transplante Capilar' },
 ]
 
 export const SLIDE08_STEPS = galleryItems.length
@@ -52,7 +52,7 @@ export default function Slide08Dia1({ galleryIndex = 0, onGalleryIndexChange }) 
             onActiveChange={onGalleryIndexChange}
             defaultIndex={0}
             expandRatio={0.52}
-            trigger="hover"
+            trigger="click"
             height={440}
             gap={10}
             radius={16}

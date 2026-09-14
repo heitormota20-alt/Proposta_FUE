@@ -6,7 +6,7 @@ import ParallaxGallery from '../components/ParallaxGallery'
 const MODULES = ['01', '02', '3A', '3B', '4', '5', '6', '7', '8', '9', '10', '11', '12']
 
 const GALLERY_IMAGES = MODULES.map(
-  (n) => `/images/Jornada Clinic/[DRRAFAEL-FUE-ULTRA][MODULO-${n}][400x600].png`
+  (n) => `/images/Jornada Clinic/[DRRAFAEL-FUE-ULTRA][MODULO-${n}][400x600].webp`
 )
 
 export default function Slide23UltramarClinic() {

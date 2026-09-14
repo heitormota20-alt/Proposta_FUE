@@ -5,7 +5,7 @@ export default function Slide18Recap() {
     <section className={`slide ${styles.slide}`}>
       {/* ── Foto como background ── */}
       <img
-        src="/images/Slide_31/banner-home.png"
+        src="/images/Slide_31/banner-home.webp"
         alt=""
         className={styles.bg}
         aria-hidden="true"

@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react'
 import SlideContainer from './components/SlideContainer'
 import ProgressIndicator from './components/ProgressIndicator'
-import NavArrows from './components/NavArrows'
 
 import Slide01Hero from './slides/Slide01Hero'
 import Slide02Mercado, { SLIDE02_STEPS } from './slides/Slide02Mercado'
@@ -30,9 +29,8 @@ import Slide18Recap from './slides/Slide18Recap'
 import Slide32Entregaveis, { SLIDE32_STEPS } from './slides/Slide32Entregaveis'
 import SlideQuantoPagaria, { SLIDE_QUANTOPAGARIA_STEPS } from './slides/Slide_QuantoPagaria'
 import Slide19Entregaveis, { SLIDE19_STEPS } from './slides/Slide19Entregaveis'
-import SlideDepoimentos from './slides/Slide_Depoimentos'
-import SlideMasNaoPaga from './slides/Slide_MasNaoPaga'
-import Slide20Preco from './slides/Slide20Preco'
+import SlideMasNaoPaga, { SLIDE_MASNAOPAGA_STEPS } from './slides/Slide_MasNaoPaga'
+import Slide20Preco, { SLIDE20_STEPS } from './slides/Slide20Preco'
 import Slide21Pagamento from './slides/Slide21Pagamento'
 import Slide22UltramarBusiness from './slides/Slide22UltramarBusiness'
 import Slide23UltramarClinic from './slides/Slide23UltramarClinic'
@@ -78,7 +76,6 @@ const SLIDES = [
   SlideQuantoPagaria,    // 24 · "Quanto você pagaria?" — teaser de preço
   Slide19Entregaveis,    // 25 · Entregáveis com valores — total R$173.000 (+ overlay "Valor Oficial")
   SlideMasNaoPaga,       // 26 · "Mas você não vai pagar esse valor…"
-  SlideDepoimentos,      // 27 · Depoimentos — o que os alunos dizem
   Slide20Preco,          // 28 · Preço — R$173k → R$105k → R$85k
   Slide21Pagamento,      // 29 · Formas de pagamento
 ]
@@ -97,6 +94,8 @@ const SLIDE17_INDEX = SLIDES.indexOf(Slide17BonusWorkshop)
 const SLIDE32_INDEX = SLIDES.indexOf(Slide32Entregaveis)
 const SLIDE_QUANTOPAGARIA_INDEX = SLIDES.indexOf(SlideQuantoPagaria)
 const SLIDE19_INDEX = SLIDES.indexOf(Slide19Entregaveis)
+const SLIDE_MASNAOPAGA_INDEX = SLIDES.indexOf(SlideMasNaoPaga)
+const SLIDE20_INDEX = SLIDES.indexOf(Slide20Preco)
 
 // Slides com carrossel sanfona (AccordionGallery) — a seta de avançar,
 // enquanto o usuário estiver neles, primeiro expande cada card da galeria
@@ -126,6 +125,8 @@ export default function App() {
   const [slide32Revealed, setSlide32Revealed] = useState(-1)
   const [slideQuantoPagariaRevealed, setSlideQuantoPagariaRevealed] = useState(-1)
   const [slide19Revealed, setSlide19Revealed] = useState(-1)
+  const [slideMasNaoPagaRevealed, setSlideMasNaoPagaRevealed] = useState(-1)
+  const [slide20Revealed, setSlide20Revealed] = useState(-1)
   const [galleryIndices, setGalleryIndices] = useState({})
 
   const handleSlideChange = useCallback((index) => {
@@ -263,6 +264,33 @@ export default function App() {
       }
     }
 
+    // SlideMasNaoPaga: avançar entra com o overlay "Desconto de primeiro
+    // lote" por cima do slide, sem navegar para o próximo; recuar fecha o
+    // overlay antes de voltar a navegar normalmente.
+    if (currentSlide === SLIDE_MASNAOPAGA_INDEX) {
+      if (direction === 1 && slideMasNaoPagaRevealed < SLIDE_MASNAOPAGA_STEPS - 1) {
+        setSlideMasNaoPagaRevealed((prev) => Math.min(prev + 1, SLIDE_MASNAOPAGA_STEPS - 1))
+        return
+      }
+      if (direction === -1 && slideMasNaoPagaRevealed >= 0) {
+        setSlideMasNaoPagaRevealed((prev) => prev - 1)
+        return
+      }
+    }
+
+    // Slide20Preco: avançar revela cada valor um a um; o clique final
+    // revela junto o bloco de preço da Turma 4 e as bandeiras de pagamento.
+    if (currentSlide === SLIDE20_INDEX) {
+      if (direction === 1 && slide20Revealed < SLIDE20_STEPS - 1) {
+        setSlide20Revealed((prev) => Math.min(prev + 1, SLIDE20_STEPS - 1))
+        return
+      }
+      if (direction === -1 && slide20Revealed >= 0) {
+        setSlide20Revealed((prev) => prev - 1)
+        return
+      }
+    }
+
     // Slide14: avançar revela pills um a um; recuar oculta um a um.
     if (currentSlide === SLIDE14_INDEX) {
       if (direction === 1 && slide14Revealed < SLIDE14_STEPS - 1) {
@@ -356,6 +384,10 @@ export default function App() {
               ? { revealedUpTo: slideQuantoPagariaRevealed }
               : index === SLIDE19_INDEX
               ? { revealedUpTo: slide19Revealed }
+              : index === SLIDE_MASNAOPAGA_INDEX
+              ? { revealedUpTo: slideMasNaoPagaRevealed }
+              : index === SLIDE20_INDEX
+              ? { revealedUpTo: slide20Revealed }
               : galleryConfig
               ? {
                   galleryIndex: galleryIndices[index] ?? 0,
@@ -367,13 +399,6 @@ export default function App() {
       </SlideContainer>
 
       <ProgressIndicator current={currentSlide} total={SLIDES.length} />
-
-      <NavArrows
-        onPrev={() => navigate(-1)}
-        onNext={() => navigate(1)}
-        canPrev={currentSlide > 0}
-        canNext={currentSlide < SLIDES.length - 1}
-      />
     </>
   )
 }

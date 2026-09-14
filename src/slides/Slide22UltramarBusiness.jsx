@@ -6,7 +6,7 @@ import ParallaxGallery from '../components/ParallaxGallery'
 const MODULES = ['MODULO-01', 'MODULO-02', 'MODULO-03', 'MODULO-04', 'MODULO-05', 'WORKSHOP-BONUS']
 
 const GALLERY_IMAGES = MODULES.map(
-  (n) => `/images/Jornada Business/[DRRAFAEL-FUE-ULTRA][${n}][400x600].png`
+  (n) => `/images/Jornada Business/[DRRAFAEL-FUE-ULTRA][${n}][400x600].webp`
 )
 
 export default function Slide22UltramarBusiness() {

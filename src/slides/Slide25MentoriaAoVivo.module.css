@@ -7,15 +7,37 @@
   opacity: 0.22;
 }
 
-.inner {
-  position: relative; z-index: 2;
-  display: grid; grid-template-columns: 1.2fr 1fr; grid-template-rows: 1fr;
-  gap: var(--space-9); height: 100%; align-items: center;
+/* ── Foto de fundo ── */
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  z-index: 1;
 }
 
-.left {
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.15) 65%, transparent 85%);
+}
+
+.bottomFade {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 18%);
+}
+
+.inner {
+  position: relative; z-index: 3;
   display: flex; flex-direction: column; gap: var(--space-4);
-  min-height: 0; min-width: 0;
+  justify-content: center;
+  height: 100%; max-width: 700px;
 }
 
 .badge {
@@ -48,26 +70,3 @@
 }
 
 .highlight { color: var(--accent); font-weight: 700; }
-
-/* ── Lado direito — placeholder de imagens (a enviar) ── */
-.right { display: flex; align-items: center; justify-content: center; height: 100%; min-height: 0; min-width: 0; }
-
-.imageSlot {
-  width: 100%; height: 100%; max-height: 100%;
-  aspect-ratio: 3 / 4;
-  border: 1px solid rgba(21, 188, 133, 0.3);
-  border-radius: 16px;
-  background: rgba(21, 188, 133, 0.04);
-  box-shadow: 0 0 40px rgba(21, 188, 133, 0.1);
-  display: flex; align-items: center; justify-content: center;
-}
-
-.imageLabel {
-  font-family: var(--font-mono); font-size: 0.6875rem;
-  letter-spacing: 0.3em; color: rgba(21, 188, 133, 0.35);
-}
-
-@media (max-width: 768px) {
-  .inner { grid-template-columns: 1fr; }
-  .right { display: none; }
-}

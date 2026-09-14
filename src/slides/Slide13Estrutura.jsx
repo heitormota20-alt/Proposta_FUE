@@ -3,11 +3,11 @@ import AccordionGallery from '../components/AccordionGallery'
 import GradientBlinds from '../components/GradientBlinds'
 
 const topicImages = [
-  '/images/Slide_17/Img-01.png',
-  '/images/Slide_17/Img-02.png',
-  '/images/Slide_17/Img-03.png',
-  '/images/Slide_17/Img-04.png',
-  '/images/Slide_17/Img-05.jpg',
+  '/images/Slide_17/Img-01.webp',
+  '/images/Slide_17/Img-02.webp',
+  '/images/Slide_17/Img-03.webp',
+  '/images/Slide_17/Img-04.webp',
+  '/images/Slide_17/Img-05.webp',
 ]
 
 const galleryItems = [
@@ -55,7 +55,7 @@ export default function Slide13Estrutura({ galleryIndex = 0, onGalleryIndexChang
             onActiveChange={onGalleryIndexChange}
             defaultIndex={0}
             expandRatio={0.42}
-            trigger="hover"
+            trigger="click"
             height={460}
             gap={8}
             radius={16}

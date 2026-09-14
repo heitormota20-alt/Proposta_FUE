@@ -8,31 +8,31 @@ const events = [
     period: 'Natural de',
     title: 'Vitória / ES',
     desc: 'Formado em Engenharia de Produção.',
-    photo: '/images/Slide_03/Img-01.png',
+    photo: '/images/Slide_03/Img-01.webp',
   },
   {
     period: 'Formado em',
     title: 'Engenharia de Produção',
     desc: '',
-    photo: '/images/Slide_03/Img-02.png',
+    photo: '/images/Slide_03/Img-02.webp',
   },
   {
     period: 'Desistiu de um estágio de Engenharia na',
     title: 'Alemanha',
     desc: 'para cursar Medicina.',
-    photo: '/images/Slide_03/Img-03.png',
+    photo: '/images/Slide_03/Img-03.webp',
   },
   {
     period: 'Se mudou para São Paulo para fazer',
     title: 'residência médica',
     desc: 'com foco em Cirurgia Plástica.',
-    photo: '/images/Slide_03/Img-04.jpg',
+    photo: '/images/Slide_03/Img-04.webp',
   },
   {
     period: 'Conheceu a área de',
     title: 'Transplante Capilar',
     desc: 'como indicação do Chefe de Residência.',
-    photo: '/images/Slide_03/Img-05.png',
+    photo: '/images/Slide_03/Img-05.webp',
   },
 ]
 

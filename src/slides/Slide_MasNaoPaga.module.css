@@ -15,34 +15,81 @@
   gap: var(--space-6); max-width: 800px; margin: 0 auto;
 }
 
-.stack { display: flex; flex-direction: column; gap: var(--space-2); }
-
-.label {
-  font-family: var(--font-mono); font-size: 0.75rem;
-  letter-spacing: 0.2em; color: var(--text-muted); text-transform: uppercase;
-}
-
-.strikePrice {
-  font-family: var(--font-display); font-weight: 700;
-  font-size: clamp(3rem, 6vw, 6.5rem);
-  color: rgba(255,255,255,0.3);
-  letter-spacing: -0.03em; line-height: 1;
-  text-decoration: line-through;
-  text-decoration-color: rgba(255,255,255,0.25);
-}
-
-.comma { font-size: 0.5em; vertical-align: baseline; }
-
-.divider {
-  width: 60px; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(21, 188, 133,0.4), transparent);
-}
-
 .statement {
   font-family: var(--font-display); font-weight: 700;
-  font-size: clamp(2.25rem, 4.5vw, 5rem);
+  font-size: clamp(2.75rem, 6vw, 6.5rem);
   color: var(--white); line-height: 1.15;
   text-transform: none; letter-spacing: -0.02em;
 }
 
 .accent { font-style: italic; font-weight: 300; color: var(--accent); }
+
+/* ── Overlay "Desconto de primeiro lote" — vidro fosco por cima do slide inteiro ── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(4, 8, 6, 0.45);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  transition: opacity 0.4s ease;
+}
+
+.overlay_idle {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay_in {
+  opacity: 1;
+  pointer-events: auto;
+  animation: overlayFade 0.4s ease both;
+}
+
+@keyframes overlayFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.card {
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center; gap: var(--space-5);
+  padding: clamp(2.5rem, 5vw, 4.5rem) clamp(2.5rem, 6vw, 5.5rem);
+  width: fit-content; max-width: min(90vw, 900px);
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(10, 20, 17, 0.5);
+  box-shadow:
+    0 30px 80px -20px rgba(0,0,0,0.7),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.overlayTitle {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.5rem, 2.6vw, 2.5rem);
+  color: var(--white); line-height: 1.25; text-transform: none; letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.overlaySubtitle {
+  font-family: var(--font-body); font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  line-height: 1.4;
+}
+
+.accentItalic { font-style: italic; font-weight: 300; color: var(--accent); }
+
+.overlayPriceBox {
+  padding: var(--space-4) clamp(2rem, 4vw, 3.5rem);
+  border: 1px solid rgba(21, 188, 133, 0.45);
+  border-radius: 16px;
+  background: rgba(21, 188, 133, 0.06);
+}
+
+.overlayPrice {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(3rem, 5.5vw, 5rem);
+  color: var(--accent); letter-spacing: -0.02em;
+  text-shadow: 0 0 24px rgba(21, 188, 133, 0.55), 0 0 48px rgba(21, 188, 133, 0.25);
+}

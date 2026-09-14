@@ -2,7 +2,14 @@ import styles from './Slide_MasNaoPaga.module.css'
 import GradientOrb from '../components/GradientOrb'
 import GradientBlinds from '../components/GradientBlinds'
 
-export default function SlideMasNaoPaga() {
+// Um único passo extra: clicar em avançar, já no fim deste slide, não navega
+// para o próximo — abre um overlay em vidro fosco por cima do próprio slide,
+// com o desconto de primeiro lote (mesmo efeito do Slide19Entregaveis).
+export const SLIDE_MASNAOPAGA_STEPS = 1
+
+export default function SlideMasNaoPaga({ revealedUpTo = -1 }) {
+  const overlayOpen = revealedUpTo >= 0
+
   return (
     <section className={`slide ${styles.slide}`}>
       <div className={styles.grainientBg}>
@@ -26,17 +33,23 @@ export default function SlideMasNaoPaga() {
       <GradientOrb variant="teal" size={900} top="5%" left="25%" opacity={0.2} />
 
       <div className={styles.inner}>
-        <div className={styles.stack}>
-          <span className={styles.label}>Valor oficial do programa</span>
-          <div className={styles.strikePrice}>R$ 105.000<span className={styles.comma}>,00</span></div>
+        <h1 className={styles.statement}>
+          Mas você <em className={styles.accent}>não vai pagar</em> esse valor...
+        </h1>
+      </div>
+
+      {/* ── Overlay "Desconto de primeiro lote" — entra por cima do slide,
+          sem navegar para o próximo slide ── */}
+      <div className={`${styles.overlay} ${overlayOpen ? styles.overlay_in : styles.overlay_idle}`} aria-hidden={!overlayOpen}>
+        <div className={styles.card}>
+          <h1 className={styles.overlayTitle}>Programa FUE Ultramar — Turma 4</h1>
+          <p className={styles.overlaySubtitle}>
+            <em className={styles.accentItalic}>Desconto especial de primeiro lote:</em>
+          </p>
+          <div className={styles.overlayPriceBox}>
+            <span className={styles.overlayPrice}>R$ 20.000,00</span>
+          </div>
         </div>
-
-        <div className={styles.divider} />
-
-        <h2 className={styles.statement}>
-          Mas você <em className={styles.accent}>não vai</em><br />
-          <em className={styles.accent}>pagar</em> esse valor..
-        </h2>
       </div>
     </section>
   )

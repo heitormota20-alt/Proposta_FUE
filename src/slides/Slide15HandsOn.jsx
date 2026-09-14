@@ -3,10 +3,10 @@ import AccordionGallery from '../components/AccordionGallery'
 import GradientBlinds from '../components/GradientBlinds'
 
 const galleryItems = [
-  { image: '/images/Slide_13/img-01.jpg', label: 'Treinamento com Equipe Cirúrgica' },
-  { image: '/images/Slide_13/img-02.jpg', label: 'Participação em Transplantes Reais' },
-  { image: '/images/Slide_13/img-03.jpg', label: 'Aplicação de Técnicas em Tempos Cirúrgicos' },
-  { image: '/images/Slide_13/img-04.jpg', label: 'Hands-On guiado pelos Mentores' },
+  { image: '/images/Slide_15/Imagem_01.webp', label: 'Treinamento com Equipe Cirúrgica' },
+  { image: '/images/Slide_15/Imagem_02.webp', label: 'Participação em Transplantes Reais' },
+  { image: '/images/Slide_15/Imagem_03.webp', label: 'Aplicação de Técnicas em Tempos Cirúrgicos' },
+  { image: '/images/Slide_15/Imagem_04.webp', label: 'Hands-On guiado pelos Mentores' },
 ]
 
 export const SLIDE15_STEPS = galleryItems.length
@@ -46,7 +46,7 @@ export default function Slide15HandsOn({ galleryIndex = 0, onGalleryIndexChange 
             onActiveChange={onGalleryIndexChange}
             defaultIndex={0}
             expandRatio={0.52}
-            trigger="hover"
+            trigger="click"
             height={460}
             gap={10}
             radius={16}

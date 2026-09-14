@@ -3,9 +3,9 @@ import AccordionGallery from '../components/AccordionGallery'
 import GradientBlinds from '../components/GradientBlinds'
 
 const galleryItems = [
-  { image: '/images/Slide_07/Imagem_03.jpg', label: 'Presencial' },
-  { image: '/images/Slide_07/Imagem_02.png', label: 'Online', imgStyle: { objectFit: 'contain', objectPosition: 'center' }, bottomFade: '#0a0713' },
-  { image: '/images/Slide_07/Imagem_01.png', label: 'Ao vivo' },
+  { image: '/images/Slide_07/Imagem_03.webp', label: 'Presencial' },
+  { image: '/images/Slide_07/imagem_02.webp', label: 'Online' },
+  { image: '/images/Slide_07/imagem_01.webp', label: 'Ao vivo' },
 ]
 
 // Total de cards da galeria — usado pelo App para saber quando parar de
@@ -54,7 +54,7 @@ export default function Slide07Presencial({ galleryIndex = 0, onGalleryIndexChan
             onActiveChange={onGalleryIndexChange}
             defaultIndex={0}
             expandRatio={0.52}
-            trigger="hover"
+            trigger="click"
             height={440}
             gap={10}
             radius={16}

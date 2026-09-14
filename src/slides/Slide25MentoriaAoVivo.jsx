@@ -1,5 +1,4 @@
 import styles from './Slide25MentoriaAoVivo.module.css'
-import GradientOrb from '../components/GradientOrb'
 import GradientBlinds from '../components/GradientBlinds'
 
 export default function Slide25MentoriaAoVivo() {
@@ -23,33 +22,33 @@ export default function Slide25MentoriaAoVivo() {
           mixBlendMode="lighten"
         />
       </div>
-      <GradientOrb variant="teal" size={700} top="-15%" right="-10%" opacity={0.18} />
+      {/* ── Foto como background ── */}
+      <img
+        src="/images/Slide_25/BG_Slide25.webp"
+        alt=""
+        className={styles.bg}
+        aria-hidden="true"
+      />
+      <div className={styles.overlay} aria-hidden="true" />
+      {/* ── Fade escuro no rodapé — garante leitura do número do slide ── */}
+      <div className={styles.bottomFade} aria-hidden="true" />
 
       <div className={styles.inner}>
-        <div className={styles.left}>
-          <span className={styles.badge}>Ao vivo</span>
+        <span className={styles.badge}>Ao vivo</span>
 
-          <h1 className={styles.title}>
-            Mentorias <em className={styles.accent}>ao vivo</em><br />
-            durante <em className={styles.accent}>4 meses</em>
-          </h1>
+        <h1 className={styles.title}>
+          Mentorias <em className={styles.accent}>ao vivo</em><br />
+          durante <em className={styles.accent}>4 meses</em>
+        </h1>
 
-          <p className={styles.lead}>
-            Vamos te dar a mão! Você poderá durante toda a sua jornada, aprofundar suas dúvidas diretamente com o Dr. Rafael nos encontros quinzenais da mentoria AO VIVO.
-          </p>
+        <p className={styles.lead}>
+          Vamos te dar a mão! Você poderá durante toda a sua jornada, aprofundar suas dúvidas diretamente com o Dr. Rafael nos encontros quinzenais da mentoria AO VIVO.
+        </p>
 
-          <p className={styles.sub}>
-            Todos os encontros{' '}
-            <strong className={styles.highlight}>ficarão gravados e disponíveis na sua área do aluno</strong>, para você assistir e reassistir quando quiser (até mesmo quando não conseguir participar).
-          </p>
-        </div>
-
-        {/* ── Placeholder — imagens a enviar ── */}
-        <div className={styles.right}>
-          <div className={styles.imageSlot}>
-            <span className={styles.imageLabel}>IMAGENS</span>
-          </div>
-        </div>
+        <p className={styles.sub}>
+          Todos os encontros{' '}
+          <strong className={styles.highlight}>ficarão gravados e disponíveis na sua área do aluno</strong>, para você assistir e reassistir quando quiser (até mesmo quando não conseguir participar).
+        </p>
       </div>
     </section>
   )
