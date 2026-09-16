@@ -5,7 +5,7 @@ import GradientBlinds from '../components/GradientBlinds'
 const galleryItems = [
   { image: '/images/Slide_07/Imagem_03.webp', label: 'Presencial' },
   { image: '/images/Slide_07/imagem_02.webp', label: 'Online' },
-  { image: '/images/Slide_07/imagem_01.webp', label: 'Ao vivo' },
+  { image: '/images/Slide_07/Sem Título-1.webp', label: 'Ao vivo', imgStyle: { objectFit: 'contain' } },
 ]
 
 // Total de cards da galeria — usado pelo App para saber quando parar de
