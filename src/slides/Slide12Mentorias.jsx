@@ -10,6 +10,7 @@ const galleryItems = [
   {
     image: '/images/Slide_16/IMG_01.webp',
     label: <>{highlight('6 Fellows')} durante a sua jornada conosco.</>,
+    alt: '6 Fellows durante a sua jornada conosco.',
   },
   {
     image: '/images/Slide_16/IMG_02.webp',
@@ -18,10 +19,12 @@ const galleryItems = [
         O seu fellow {highlight('acontecerá em dupla')}, prezando pela proximidade e {highlight('exclusividade do programa')}.
       </>
     ),
+    alt: 'O seu fellow acontecerá em dupla, prezando pela proximidade e exclusividade do programa.',
   },
   {
     image: '/images/Slide_16/IMG_03.webp',
-    label: <>{highlight('Acompanhamento de casos')}, vivência clínica e muito mais.</>,
+    label: <>{highlight('Acompanhamento de casos')}, vivência clínica e muito&nbsp;mais.</>,
+    alt: 'Acompanhamento de casos, vivência clínica e muito mais.',
   },
 ]
 
@@ -76,7 +79,7 @@ export default function Slide12Mentorias({ galleryIndex = 0, onGalleryIndexChang
               textTransform: 'none',
               letterSpacing: '0.01em',
               lineHeight: '1.45',
-              textWrap: 'pretty',
+              textWrap: 'balance',
             }}
           />
         </div>

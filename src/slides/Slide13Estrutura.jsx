@@ -11,10 +11,14 @@ const topicImages = [
 ]
 
 const galleryItems = [
-  { image: topicImages[0], label: 'Acompanhamento integral de cirurgias reais' },
-  { image: topicImages[1], label: 'Organização e estruturação de uma equipe cirúrgica eficiente' },
+  { image: topicImages[0], label: 'Acompanhamento integral de cirurgias reais' },
+  { image: topicImages[1], label: 'Organização e estruturação de uma equipe cirúrgica eficiente' },
   { image: topicImages[2], label: 'Revisão detalhada dos procedimentos executados' },
-  { image: topicImages[3], label: 'Direcionamento contínuo sobre postura, técnica e abordagem clínica' },
+  {
+    image: topicImages[3],
+    label: <>Direcionamento contínuo sobre postura,<br />técnica e abordagem clínica</>,
+    alt: 'Direcionamento contínuo sobre postura, técnica e abordagem clínica',
+  },
   { image: topicImages[4], label: 'Execução supervisionada de técnicas do transplante capilar' },
 ]
 
@@ -67,7 +71,7 @@ export default function Slide13Estrutura({ galleryIndex = 0, onGalleryIndexChang
               textTransform: 'none',
               letterSpacing: '0.01em',
               lineHeight: '1.45',
-              textWrap: 'pretty',
+              textWrap: 'balance',
             }}
           />
         </div>
