@@ -2,10 +2,25 @@ import styles from './Slide12Mentorias.module.css'
 import AccordionGallery from '../components/AccordionGallery'
 import GradientBlinds from '../components/GradientBlinds'
 
+const highlight = (text) => <strong style={{ color: '#15bc85', fontWeight: 700 }}>{text}</strong>
+
 const galleryItems = [
-  { image: '/images/Slide_16/IMG_01.webp', label: '6 Fellows durante a sua jornada conosco.' },
-  { image: '/images/Slide_16/IMG_02.webp', label: 'O seu fellow acontecerá em dupla, prezando pela proximidade e exclusividade do programa.' },
-  { image: '/images/Slide_16/IMG_03.webp', label: 'Acompanhamento de casos, vivência clínica e muito mais.' },
+  {
+    image: '/images/Slide_16/IMG_01.webp',
+    label: <>{highlight('6 Fellows')} durante a sua jornada conosco.</>,
+  },
+  {
+    image: '/images/Slide_16/IMG_02.webp',
+    label: (
+      <>
+        O seu fellow {highlight('acontecerá em dupla')}, prezando pela proximidade e {highlight('exclusividade do programa')}.
+      </>
+    ),
+  },
+  {
+    image: '/images/Slide_16/IMG_03.webp',
+    label: <>{highlight('Acompanhamento de casos')}, vivência clínica e muito mais.</>,
+  },
 ]
 
 export const SLIDE12_STEPS = galleryItems.length

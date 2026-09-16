@@ -190,6 +190,7 @@ export default function AccordionGallery({
       {items.map((item, i) => {
         const isActive = i === active
         const Tag = item.link ? 'a' : 'div'
+        const plainLabel = item.ariaLabel || (typeof item.label === 'string' ? item.label : item.alt || '')
         return (
           <Tag
             key={i}
@@ -210,7 +211,7 @@ export default function AccordionGallery({
             role="listitem"
             tabIndex={0}
             aria-current={isActive ? 'true' : undefined}
-            aria-label={item.label}
+            aria-label={plainLabel}
           >
             <span className={styles.clip}>
               <span
@@ -226,7 +227,7 @@ export default function AccordionGallery({
               >
                 <img
                   src={item.image}
-                  alt={item.alt || item.label || ''}
+                  alt={plainLabel}
                   draggable={false}
                   className={styles.img}
                   style={item.imgStyle}
