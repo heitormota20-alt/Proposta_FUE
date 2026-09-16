@@ -5,7 +5,7 @@ import GradientBlinds from '../components/GradientBlinds'
 const galleryItems = [
   { image: '/images/Slide_07/Imagem_03.webp', label: 'Presencial' },
   { image: '/images/Slide_07/imagem_02.webp', label: 'Online' },
-  { image: '/images/Slide_07/Sem Título-1.webp', label: 'Ao vivo', imgStyle: { objectFit: 'contain' } },
+  { image: '/images/Slide_07/Sem Título-1.webp', label: 'Ao vivo', imgStyle: { objectFit: 'contain', transform: 'scale(1.12)' } },
 ]
 
 // Total de cards da galeria — usado pelo App para saber quando parar de
@@ -61,6 +61,7 @@ export default function Slide07Presencial({ galleryIndex = 0, onGalleryIndexChan
             accentColor="#15bc85"
             overlayColor="#060010"
             textColor="#ffffff"
+            labelStyle={{ fontSize: 'clamp(1.1875rem, 1.3vw, 1.5rem)' }}
           />
         </div>
 
