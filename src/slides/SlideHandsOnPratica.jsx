@@ -6,7 +6,7 @@ const galleryItems = [
   { image: '/images/Slide_10/img-01.webp', tagline: 'Dr. Rafael Ultramar', label: 'Identidade e Branding' },
   { image: '/images/Slide_10/img-02.webp', tagline: 'Guto Galamba',         label: 'Produção de Conteúdo' },
   { image: '/images/Slide_10/img-03.webp', tagline: 'Daniel Lara',          label: 'Marketing e Conversão' },
-  { image: '/images/Slide_10/img-04.webp', tagline: 'Filippe Holze',        label: 'Mercado Digital de Forma Estratégica' },
+  { image: '/images/Slide_10/img-04.webp', tagline: 'Filippe Holzer',       label: 'Mercado Digital de Forma Estratégica' },
   { image: '/images/Slide_10/img-05.webp', tagline: 'Dra. Priscila Barreto',  label: 'LTV no Mercado de Transplante Capilar' },
   { image: '/images/Slide_10/img-06.webp', tagline: 'Dr. Rafael Ultramar',   label: 'Encantamento do Cliente' },
   { image: '/images/Slide_10/img-07.webp', tagline: 'Dr. Rafael Ultramar',   label: 'Técnica + Planejamento Cirúrgico' },

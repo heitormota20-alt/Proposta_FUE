@@ -6,7 +6,7 @@ const galleryItems = [
   { image: '/images/Slide_13/img-01.webp', label: 'Treinamento com Equipe Cirúrgica' },
   { image: '/images/Slide_13/img-02.webp', label: 'Participação em Transplantes Reais' },
   { image: '/images/Slide_13/img-03.webp', label: 'Aplicação de Técnicas em Tempos Cirúrgicos' },
-  { image: '/images/Slide_13/img-04.webp', label: 'Filippe Holzer' },
+  { image: '/images/Slide_13/img-04.webp', label: 'Hands-On guiado pelos Mentores' },
 ]
 
 export const SLIDE11_STEPS = galleryItems.length
