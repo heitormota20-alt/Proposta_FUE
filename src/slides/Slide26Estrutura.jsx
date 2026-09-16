@@ -6,17 +6,17 @@ const bullets = [
   {
     Icon: Hand,
     title: <>Treinamento <em>presencial</em> Hands On</>,
-    desc: <>1 dia teórico e 2 dias imersivos na clínica vivenciando cirurgias&nbsp;reais.</>,
+    desc: <>1 dia teórico e 2 dias imersivos na clínica vivenciando cirurgias&nbsp;reais;</>,
   },
   {
     Icon: Users,
     title: <>Encontros <em>presenciais de Fellow</em></>,
-    desc: <>6 dias divididos em 3 meses (você e mais um aluno) acompanhando os bastidores da clínica do Dr. Rafael&nbsp;Ultramar.</>,
+    desc: <>6 dias divididos em 3 meses (você e mais um aluno) acompanhando os bastidores da clínica do Dr. Rafael&nbsp;Ultramar;</>,
   },
   {
     Icon: Laptop,
     title: <>Conteúdo Online <em>Exclusivo</em></>,
-    desc: <>Master Business & Master&nbsp;Clinic.</>,
+    desc: <>Master Business & Master&nbsp;Clinic;</>,
   },
   {
     Icon: Video,

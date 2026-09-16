@@ -1,9 +1,9 @@
 import styles from './Slide15BonusConcierge.module.css'
 
 const bullets = [
-  <>Uma plataforma <em className={styles.em}>educacional</em> com experiência estilo Netflix</>,
-  <>Mais de <em className={styles.em}>40 horas de conteúdo</em> para você assistir e reassistir a <em className={styles.em}>qualquer momento onde estiver</em> (seja pelo computador ou pelo celular)</>,
-  <>Duas trilhas de aprendizado focadas em fazer você evoluir como <em className={styles.em}>cirurgião</em> e <em className={styles.em}>empresário</em></>,
+  <>Uma plataforma <em className={styles.em}>educacional</em> com experiência estilo Netflix;</>,
+  <>Mais de <em className={styles.em}>40 horas de conteúdo</em> para você assistir e reassistir a <em className={styles.em}>qualquer momento onde estiver</em> (seja pelo computador ou pelo celular);</>,
+  <>Duas trilhas de aprendizado focadas em fazer você evoluir como <em className={styles.em}>cirurgião</em> e&nbsp;<em className={styles.em}>empresário</em>.</>,
 ]
 
 export const SLIDE_CONCIERGE_STEPS = bullets.length

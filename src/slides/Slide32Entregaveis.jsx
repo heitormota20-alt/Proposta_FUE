@@ -6,16 +6,16 @@ import styles from './Slide32Entregaveis.module.css'
 import GradientBlinds from '../components/GradientBlinds'
 
 const entregaveis = [
-  { Icon: Hand, text: 'Treinamento Presencial Hands On' },
-  { Icon: Users, text: 'Encontro Presencial de Fellow' },
-  { Icon: Video, text: 'Encontros Ao Vivo em Grupo' },
-  { Icon: Laptop, text: 'Conteúdo Online Exclusivo' },
-  { Icon: BadgeCheck, text: 'Certificação Oficial' },
-  { Icon: Contact, text: 'Acesso à Comunidade Exclusiva' },
-  { Icon: Film, text: 'Biblioteca de Procedimentos Gravados' },
-  { Icon: BellRing, text: 'Concierge Pessoal' },
-  { Icon: Rocket, text: 'Workshop Acelerador de Carreiras' },
-  { Icon: Crown, text: 'Encontros Outside com Grandes Nomes' },
+  { Icon: Hand, text: 'Treinamento Presencial Hands On' },
+  { Icon: Users, text: 'Encontro Presencial de Fellow' },
+  { Icon: Video, text: 'Encontros Ao Vivo em Grupo' },
+  { Icon: Laptop, text: 'Conteúdo Online Exclusivo' },
+  { Icon: BadgeCheck, text: 'Certificação Oficial' },
+  { Icon: Contact, text: 'Acesso à Comunidade Exclusiva' },
+  { Icon: Film, text: 'Biblioteca de Procedimentos Gravados' },
+  { Icon: BellRing, text: 'Concierge Pessoal' },
+  { Icon: Rocket, text: 'Workshop Acelerador de Carreiras' },
+  { Icon: Crown, text: 'Encontros Outside com Grandes Nomes' },
 ]
 
 export const SLIDE32_STEPS = entregaveis.length

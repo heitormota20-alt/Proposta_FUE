@@ -5,27 +5,27 @@ import GradientBlinds from '../components/GradientBlinds'
 const bullets = [
   {
     Icon: Magnet,
-    text: <>Como atrair pacientes que pagam caro e que voltam sempre sem gastar fortunas com&nbsp;anúncios</>,
+    text: <>Como atrair pacientes que pagam caro e que voltam sempre sem gastar fortunas com&nbsp;anúncios;</>,
   },
   {
     Icon: Rocket,
-    text: <>Método para faturar em meses o que muitos não faturam em&nbsp;anos</>,
+    text: <>Método para faturar em meses o que muitos não faturam em&nbsp;anos;</>,
   },
   {
     Icon: ShieldAlert,
-    text: <>Erros mais comuns que travam a carreira de médicos de TC — e como&nbsp;evitá-los</>,
+    text: <>Erros mais comuns que travam a carreira de médicos de TC — e como&nbsp;evitá-los;</>,
   },
   {
     Icon: Award,
-    text: <>Estratégias comprovadas para se tornar referência em TC na sua&nbsp;região</>,
+    text: <>Estratégias comprovadas para se tornar referência em TC na sua&nbsp;região;</>,
   },
   {
     Icon: Sparkles,
-    text: <>Técnicas exclusivas de FUE que farão os pacientes desejar o seu&nbsp;serviço</>,
+    text: <>Técnicas exclusivas de FUE que farão os pacientes desejar o seu&nbsp;serviço;</>,
   },
   {
     Icon: Banknote,
-    text: <>O segredo para elevar em até 3x o ticket médio do seu&nbsp;paciente</>,
+    text: <>O segredo para elevar em até 3x o ticket médio do seu&nbsp;paciente.</>,
   },
 ]
 
