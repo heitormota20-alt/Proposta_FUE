@@ -2,7 +2,9 @@ import styles from './Slide12Mentorias.module.css'
 import AccordionGallery from '../components/AccordionGallery'
 import GradientBlinds from '../components/GradientBlinds'
 
-const highlight = (text) => <strong style={{ color: '#15bc85', fontWeight: 700 }}>{text}</strong>
+const highlight = (text) => (
+  <strong style={{ color: '#15bc85', fontWeight: 700, fontFamily: 'var(--font-display)' }}>{text}</strong>
+)
 
 const galleryItems = [
   {
