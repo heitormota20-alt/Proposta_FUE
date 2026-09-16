@@ -6,7 +6,7 @@ const galleryItems = [
   { image: '/images/Slide_13/img-01.webp', label: 'Treinamento com Equipe Cirúrgica' },
   { image: '/images/Slide_13/img-02.webp', label: 'Participação em Transplantes Reais' },
   { image: '/images/Slide_13/img-03.webp', label: 'Aplicação de Técnicas em Tempos Cirúrgicos' },
-  { image: '/images/Slide_13/img-04.webp', label: 'Hands-On guiado pelos Mentores' },
+  { image: '/images/Slide_13/img-04.webp', label: 'Filippe Holzer' },
 ]
 
 export const SLIDE11_STEPS = galleryItems.length
@@ -54,7 +54,7 @@ export default function Slide11Online({ galleryIndex = 0, onGalleryIndexChange }
             overlayColor="#060010"
             textColor="#ffffff"
             labelStyle={{
-              fontSize: 'clamp(0.7rem, 0.85vw, 0.875rem)',
+              fontSize: 'clamp(0.95rem, 0.85vw, 1.125rem)',
               textTransform: 'none',
               letterSpacing: '0.01em',
               lineHeight: '1.45',

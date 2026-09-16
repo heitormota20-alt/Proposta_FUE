@@ -59,7 +59,7 @@ export default function SlideHandsOnPratica({ galleryIndex = 0, onGalleryIndexCh
             overlayColor="#060010"
             textColor="#ffffff"
             labelStyle={{
-              fontSize: 'clamp(0.7rem, 0.85vw, 0.875rem)',
+              fontSize: 'clamp(0.95rem, 0.85vw, 1.125rem)',
               textTransform: 'none',
               letterSpacing: '0.01em',
               lineHeight: '1.45',
