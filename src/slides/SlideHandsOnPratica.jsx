@@ -10,6 +10,7 @@ const galleryItems = [
   { image: '/images/Slide_10/img-05.webp', tagline: 'Dra. Priscila Barreto',  label: 'LTV no Mercado de Transplante Capilar' },
   { image: '/images/Slide_10/img-06.webp', tagline: 'Dr. Rafael Ultramar',   label: 'Encantamento do Cliente' },
   { image: '/images/Slide_10/img-07.webp', tagline: 'Dr. Rafael Ultramar',   label: 'Técnica + Planejamento Cirúrgico' },
+  { image: '/images/Slide_11/Rodolfo_guilherme.jpg', tagline: 'Rodolfo Guilherme', label: 'Branding e posicionamento visual' },
 ]
 
 export const SLIDE_HANDSON_STEPS = galleryItems.length
